@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/statics/css/general.css">
+    <link rel="stylesheet" href="/statics/css/dash_css.css">
+    <link rel="stylesheet" href="/statics/css/dash.css">
+    <script>
+        document.onreadystatechange = function() {
+            if (document.readyState == 'complete') {
+                $(".loading").fadeOut(200)
+                $("body").css("overflow-y","unset")
+                $("main").delay(300).css("animation", "showing 0.5s forwards ease-in-out");
+                document.onreadystatechange = () => {}
+            }
+        };
+    </script>
+    <script src="/statics/js/dash.js"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="loading">
+        <div class="loader"></div>
+    </div>
+    <div class="nav">
+        <div class="name">
+            {{name}}
+        </div>
+        <div class="items">
+            <a onclick="sh()">
+                <div id="menuToggle" class="it">
+                    <i class="fa-solid fa-bars"></i><it>&nbsp;Hide menu</it>
+                </div>
+            </a>
+            {% for i in list(mIt.keys()) %}
+            <a href="{{mIt[i]['link']}}">
+                <div class="it">
+                    {{mIt[i]["icon"] | safe}}<it>&nbsp;{{i}}</it>
+                </div>
+            </a>
+            {% endfor %}
+            {% if isAdmin %}
+            <a href="/admin">
+                <div class="it">
+                    <i class="fa-solid fa-lock"></i><it>&nbsp;Admin Panel</it>
+                </div>
+            </a>
+            {% endif %}
+        </div>
+        <div class="users">
+            <h5>{{user}}</h5>
+            <h6>Coins: {{coin}}</h6>
+        </div>
+    </div>
+    <div class="main">
+        <main>
+            <div class="welcome">
+                <h2>{{bigWel}}</h2>
+                <h4>{{smallWel}}</h4>
+            </div>
+            <div class="info">
+                <div class="item">
+                    <div class="name">cpu:</div>
+                    <div class="i">{{cpu}}%/{{dcpu}}%</div>
+                </div>
+                <div class="item">
+                    <div class="name">ram:</div>
+                    <div class="i">{{ram}}Gb/{{dram}}Gb</div>
+                </div>
+                <div class="item">
+                    <div class="name">disk:</div>
+                    <div class="i">{{disk}}Gb/{{ddisk}}Gb</div>
+                </div>
+                <div class="item">
+                    <div class="name">slot:</div>
+                    <div class="i">{{slot}}/{{dslot}}</div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="text">
+                    <h6 style="float: right; margin-top: 2px;">
+                        <i class="fa-regular fa-clock"></i>
+                        {{loadTime}}s
+                    </h6>
+                    <h5>Copyright © 2024-{{datetime.datetime.now().strftime("%Y")}} <a href="#">Xlpanel</a>.</h5>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

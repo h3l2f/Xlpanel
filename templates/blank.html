@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/statics/css/general.css">
+    <link rel="stylesheet" href="/statics/css/dash_css.css">
+    <title>Blank</title>
+</head>
+<body>
+    <div class="nav">
+        <div class="name">
+            {{name}}
+        </div>
+        <div class="items">
+            {% for i in list(mIt.keys()) %}
+            <a href="{{mIt[i]['link']}}">
+                <div class="it">
+                    {{mIt[i]["icon"] | safe}}&nbsp;{{i}}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="users">
+            <h5>{{user}}</h5>
+            <h6>Coins: {{coin}}</h6>
+        </div>
+    </div>
+    <div class="main">
+        <main></main>
+        <footer>
+            <div class="text">
+                    <h6 style="float: right; margin-top: 2px;">
+                        <i class="fa-regular fa-clock"></i>
+                        {{loadTime}}s
+                    </h6>
+                <h5>Copyright © 2024-{{datetime.datetime.now().strftime("%Y")}} <a href="#">Xlpanel</a>.</h5>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

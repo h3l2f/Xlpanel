@@ -1,0 +1,100 @@
+@font-face {
+font-family: jetbrain;
+src: url(/statics/font/jetbrains-mono.ttf);
+}
+
+body, html {
+    height: 100vh;
+    max-height: 100vh;
+    background-color: #000010;
+    color: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: jetbrain;
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #1100c859;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #0040ff52;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #1600ff;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(0, 68, 255);
+}
+
+@keyframes showing {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.loader,
+.loader:before,
+.loader:after {
+    --c:no-repeat linear-gradient(#0000aa 0 0);
+    background:var(--c), var(--c), var(--c), var(--c);
+    animation: l19-1 1.5s infinite, l19-2 1.5s infinite;
+}
+.loader:before,
+.loader:after {
+    content: "";
+    grid-area: 1/1;
+    transform: translate(
+        calc(50% - 2px),
+        calc(2px - 50%)
+        ) rotate(90deg);
+    animation-delay: -.25s;
+}
+.loader:after {
+    transform: translate(
+        calc(2px - 50%),
+        calc(50% - 2px)
+        ) rotate(90deg);
+}
+@keyframes l19-1 {
+    0%,
+    10% {
+        background-size: 0 4px, 4px 0
+    }
+    40%,
+    60% {
+        background-size: 100% 4px, 4px 100%
+    }
+    90%,
+    100% {
+        background-size: 0 4px, 4px 0
+    }
+}
+@keyframes l19-2 {
+    0%, 49.9% {
+        background-position: 0 0, 0 0, 100% 100%, 100% 100%
+    }
+    50%, 100% {
+        background-position: 100% 0, 0 100%, 0 100%, 100% 0
+    }
+}

@@ -1,0 +1,104 @@
+{
+    "name": "Xlpanel",
+    "pterodactyl": {
+        "host": "",
+        "key": ""
+    },
+    "version": "0.0.1",
+    "codename": "blyat",
+    "flask": {
+        "host": "0.0.0.0",
+        "port": 5000,
+        "debug": true
+    },
+    "database": "xlpanel.db",
+    "db_comment": "Only support sqlite, please provide a file name, not link!",
+    "default": {
+        "cpu": 300,
+        "ram": 2,
+        "disk": 5,
+        "slot": 1,
+        "coin": 0
+    },
+    "eggs": {
+        "bungeecord": {
+            "display": "BungeeCord",
+            "minimum": {
+                "ram": 1024,
+                "disk": 1024,
+                "cpu": 75
+            },
+            "maximum": {
+                "ram": null,
+                "disk": null,
+                "cpu": null
+            },
+            "info": {
+                "egg": 3,
+                "docker_image": "ghcr.io/pterodactyl/yolks:java_17",
+                "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+                "environment": {
+                    "SERVER_JARFILE": "bungeecord.jar",
+                    "BUNGEE_VERSION": "latest"
+                },
+                "feature_limits": {
+                    "databases": 4,
+                    "backups": 4
+                }
+            }
+        },
+        "vnljv": {
+            "display": "Minecraft Vanila",
+            "minimum": {
+                "ram": 1024,
+                "disk": 1024,
+                "cpu": 100
+            },
+            "maximum": {
+                "ram": null,
+                "disk": null,
+                "cpu": null
+            },
+            "info": {
+                "egg": 2,
+                "docker_image": "ghcr.io/pterodactyl/yolks:java_17",
+                "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}}",
+                "environment": {
+                    "SERVER_JARFILE": "server.jar",
+                    "VANILLA_VERSION": "latest"
+                },
+                "feature_limits": {
+                    "databases": 4,
+                    "backups": 4
+                }
+            }
+        },
+        "paper": {
+          "display": "Paper",
+          "minimum": {
+            "ram": 1024,
+            "disk": 1024,
+            "cpu": 100
+          },
+          "maximum": {
+            "ram": null,
+            "disk": null,
+            "cpu": null
+          },
+          "info": {
+            "egg": 1,
+            "docker_image": "ghcr.io/pterodactyl/yolks:java_17",
+            "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
+            "environment": {
+              "SERVER_JARFILE": "server.jar",
+              "BUILD_NUMBER": "latest",
+              "MINECRAFT_VERSION": "latest"
+            },
+            "feature_limits": {
+              "databases": 4,
+              "backups": 4
+            }
+          }
+        }
+    }
+}

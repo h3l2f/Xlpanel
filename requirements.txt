@@ -1,0 +1,5 @@
+flask
+flask-sock
+flask-cors
+sqlite3
+bcrypt==4.1.1

@@ -1,0 +1,48 @@
+main {
+    opacity: 0;
+    overflow-x: auto;
+}
+
+main .welcome {
+    padding: 15px;
+    margin: 15px;
+    border: dashed 2px #0000aa;
+    border-radius: 16px;
+    background-color: #0000aa20;
+}
+
+main .welcome * {
+    font-weight: 100;
+}
+
+main .info {
+    /* padding: 15px; */
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+main .info .item {
+    border: dashed 1px #0000aa;
+    border-radius: 16px;
+    margin: 5px;
+    width: 100%;
+    max-width: 250px;
+}
+
+main .info .item .name {
+    padding: 5px 10px;
+    font-size: 15px;
+    border-bottom: solid 1px #0000aa;
+    background-color: #0000aa10;
+    border-radius: 16px 16px 0 0;
+}
+
+main .info .item .i {
+    padding: 20px 10px;
+    font-size: 25px;
+    text-align: center;
+    word-break: break-all;
+}
