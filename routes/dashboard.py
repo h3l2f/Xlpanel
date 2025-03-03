@@ -62,25 +62,29 @@ def dashboard():
             return redirect("/login")
 
         hour = int(datetime.datetime.now().strftime("%H"))
-        bigWel = f"""Good {"morning" if (5 < hour < 13) else "afternoon" if (hour < 17) else "evening"}!"""
+        bigWel = f"""Good {"midnight" if 0<=hour<5 else "morning" if 5<=hour<=12 else "afternoon" if 13<=hour<=17 else "evening"}!"""
         smallWel = random.choice(welSen).format(user=check[1]["user"])
+        uSv = helper.listPteroServer(check[1]["user"])
+        uDt = helper.checkPteroUser(check[1]["user"])
+        if (uSv[0] == False) or (uDt[0] == False):
+            return f"""Something went wrong!\n\nuSv response:\n{uSv}\n\nuDt response:\n{uDt}"""
 
         return render_template(
             "dash.html",
             name=name,
             bigWel=bigWel,
             smallWel=smallWel,
-            isAdmin=helper.checkPteroUser(check[1]["user"])[1].get("root_admin",False),
+            isAdmin=uDt[1].get("root_admin",False),
             user=check[1]["user"],
-            cpu=check[1]["cpu"],
-            ram=check[1]["ram"],
-            disk=check[1]["disk"],
-            slot=check[1]["slot"],
+            cpu=check[1]["cpu"]-uSv[2],
+            ram=check[1]["ram"]-uSv[4],
+            disk=check[1]["disk"]-uSv[3],
+            slot=check[1]["slot"]-len(uSv[1]),
             coin=check[1]["coin"],
-            dcpu=dft["cpu"],
-            dram=dft["ram"],
-            ddisk=dft["disk"],
-            dslot=dft["slot"],
+            dcpu=check[1]["cpu"],
+            dram=check[1]["ram"],
+            ddisk=check[1]["disk"],
+            dslot=check[1]["slot"],
             mIt=menuItems,
             loadTime=int((time.time()-beginT)*100000)/100000
         )

@@ -44,6 +44,10 @@ menuItems = {
         "link": "/servers",
         "icon": """<i class="fa-solid fa-server"></i>"""
     },
+    "Store": {
+        "link": "/store",
+        "icon": """<i class="fa-solid fa-bag-shopping"></i>"""
+    },
     "Afk": {
         "link": "/afk",
         "icon": """<i class="fa-solid fa-bullseye"></i>"""

@@ -63,11 +63,11 @@ body {
     border: dashed 1px transparent;
 }
 
-.nav .items a .it:hover {
+.nav .items a:hover .it {
     border: dashed 1px #0000aa;
 }
 
-.nav .items a .it:active {
+.nav .items a:active .it {
     border-style: solid;
     background-color: rgba(0, 0, 170);
 }
@@ -124,7 +124,7 @@ body {
     width: 20px;
 }
 
-@media only screen and (width<=500px) {
+@media only screen and (width<=600px) {
     .nav .name,
     .nav .items .it it,
     .nav .users {
@@ -152,5 +152,10 @@ body {
 
     .nav .items .it {
         text-align: center;
+    }
+
+    .nav .items {
+        margin-top: 10px;
+        padding-bottom: 30px;
     }
 }

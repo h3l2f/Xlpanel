@@ -105,6 +105,29 @@ def checkPteroUser(name):
                 return (True, i["attributes"])
         return (False, "nf")
 
+def listPteroServer(name):
+    userData = checkPteroUser(name)
+    resp = requests.get(pteroHost+"/api/application/servers?per_page=9999", headers=headers).json()
+    
+    if (resp.get("errors")): return (False, resp["errors"][0])
+    if (userData[0] == False): return (False, "usernf")
+    
+    uid = userData[1]["id"]
+    uDt = []
+    tCPU = 0
+    tDisk = 0
+    tRam = 0
+
+    for i in resp["data"]:
+        if i["attributes"]["user"] == uid:
+            uDt.append(i["attributes"])
+            tCPU += i["attributes"]["limits"]["cpu"]
+            tRam += i["attributes"]["limits"]["memory"]/1024
+            tDisk+= i["attributes"]["limits"]["disk"]/1024
+    return (True, uDt, tCPU, tDisk, tRam)
+
+# print(listPteroServer("h3l2f"))
+
 def chMX(domain):
     try:
         r = dns.resolver.resolve(domain, "MX")
