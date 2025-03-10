@@ -16,13 +16,20 @@ def connect():
                     cpu bigint(255),
                     disk bigint(255),
                     ram bigint(255),
-                    coin bigint(255)
+                    coin bigint(255),
+                    verified int(1)
                 )''')
     cursor.execute('''CREATE TABLE IF NOT EXISTS session
                 (
                     sid varchar(255) PRIMARY KEY,
                     passport varchar(255),
                     alive varchar(255)
+                )''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS verify
+                (
+                    user varchar(255) PRIMARY KEY,
+                    email varchar(255),
+                    code varchar(255)
                 )''')
     conn.commit()
     return conn

@@ -19,4 +19,6 @@ def login():
             resp.set_cookie("sid",check[1],86400*15,path="/")
             return resp
         else:
+            if check[1] == "verify":
+                return redirect(f"/verify?user={check[2]}")
             return render_template("login.html", name=name, error=check[1])

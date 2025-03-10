@@ -87,6 +87,10 @@ body {
     background-color: #0000aa20;
 }
 
+.nav .items .sp .it {
+    background-color: #0000aa !important;
+}
+
 .main {
     display: flex;
     flex-direction: column;

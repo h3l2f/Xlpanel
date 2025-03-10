@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/statics/css/general.css">
+    <link rel="stylesheet" href="/statics/css/verify.css">
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Verify your account</title>
+</head>
+<body>
+    <main>
+        <h2 style="font-weight: 100;">Welcome to {{name}}!</h2>
+        <h4 style="font-weight: 100;">Before you can go, we need to verify you first.</h4>
+        <h5 style="font-weight: 100;">A code has been sent to your mailbox.</h5>
+        <input type="text" id="code" autocomplete="off" maxlength="6" spellcheck="false"><br>
+        <button onclick="verify()" id="btn">Verify</button>
+    </main>
+
+    <script>
+        function findParam(name) {
+            var url_string = window.location.href; 
+            var url = new URL(url_string);
+            var c = url.searchParams.get(name) || "";
+            return c
+        }
+
+        function verify() {
+            code = $("#code")
+            btn = $("#btn")
+            main = $("main")
+
+            if (code.val().length < 6) return
+
+            code.attr("disabled","")
+            btn.attr("disabled","")
+
+            main.css("animation", "border_anim 5s ease-in-out infinite")
+
+            let formData = new FormData()
+            formData.append("code", code.val())
+            formData.append("user", findParam("user"))
+
+            fetch("/verify", {
+            method: "POST",
+            body: formData
+            })
+            .then(r => r.json())
+            .then(r => {
+                if (!r.status) {
+                    main.css("animation", "none")
+                    main.css("border-color", "#aa0000")
+                    btn.removeAttr("disabled")
+                    code.removeAttr("disabled")
+                    alert(r.message)
+                } else {
+                    setCookie("sid", r.message)
+                    window.location.href = "/dashboard"
+                }
+            })
+        }
+
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + 86400*15);
+            let expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        $(document).ready(()=>{
+            $("#code").focus(()=>{
+                $("main").css("border-color", "#0000aa")
+            })
+        })
+    </script>
+</body>
+</html>

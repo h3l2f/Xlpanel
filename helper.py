@@ -6,10 +6,20 @@ import random
 import time
 import requests
 
+from sendmail import sendVerify
+
 with open("config.json","r", encoding="utf-8") as f:
     config = json.load(f)
 pteroHost = config["pterodactyl"]["host"]
 pteroKey = config["pterodactyl"]["key"]
+
+# pteroHeader
+headers = {
+  'Authorization': f'Bearer {pteroKey}',
+  'Content-Type': 'application/json',
+  'Accept': 'Application/vnd.pterodactyl.v1+json'
+}
+# pteroHeader
 
 _chr = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321"
 
@@ -23,6 +33,16 @@ def addSID(sid, user):
     conn.commit()
     conn.close()
 
+def createPteroUser(user, email):
+    data = {
+    "email": email,
+    "username": user,
+    "first_name": ".",
+    "last_name": user
+    }
+    resp = requests.post(pteroHost+"/api/application/users",json=data, headers=headers)
+    return resp.json()
+
 def login(user, passwd):
     conn = db.connect()
     cursor = conn.cursor()
@@ -34,8 +54,64 @@ def login(user, passwd):
         return (False, "Invalid username or password.")
     if not ende.checkpw(result[0][1], passwd):
         return (False, "Invalid username or password.")
+    if result[0][8]==0:
+        conn = db.connect()
+        cursor = conn.cursor()
+
+        code = "".join(random.choice(_chr) for i in range(6))
+
+        try:
+            cursor.execute("insert into verify (user, email, code) values (?, ?, ?)", (result[0][0], result[0][2], code))
+        except Exception:
+            cursor.execute("select code from verify where user=?", (result[0][0],))
+            code = cursor.fetchall()[0][0]
+        conn.commit()
+        conn.close()
+        e = sendVerify(result[0][2], code)
+        if e[0] == False:
+            return (False, "Cannot send verify mail.")
+
+        return (False, "verify", result[0][0])
     sid = genSID()
     addSID(sid, user)
+    return (True, sid)
+
+def getUser(user):
+    conn = db.connect()
+    cursor = conn.cursor()
+    cursor.execute("select * from user where user=?", (user,))
+    result = cursor.fetchall()
+    if not len(result): return (False, "User not found.")
+    result = {
+            "user": result[0][0],
+            "slot": result[0][3],
+            "cpu": result[0][4],
+            "disk": result[0][5],
+            "ram": result[0][6],
+            "coin": result[0][7]
+        }
+    return (True, result)
+
+# print(getUser("h3l2f"))
+
+def checkVcode(user, code):
+    conn = db.connect()
+    cursor = conn.cursor()
+    cursor.execute("select * from verify where user=?", (user,))
+    r = cursor.fetchall()
+    
+    if len(r) == 0:
+        return (False, "User not found.")
+    rcode = r[0][2]
+    if code != rcode:
+        return (False, "Invalid verify code!")
+    sid = genSID()
+    addSID(sid, user)
+    cursor.execute("update user set verified=1 where user=?", (user,))
+    cursor.execute("delete from verify where user=?", (user,))
+    conn.commit()
+    conn.close()
+    createPteroUser(r[0][0], r[0][1])
     return (True, sid)
 
 def register(user, passwd, email, cpu, ram, disk, slot, coin):
@@ -47,7 +123,7 @@ def register(user, passwd, email, cpu, ram, disk, slot, coin):
     if len(result) != 0:
         return (False, "Email has been used.")
     try:
-        cursor.execute("insert into user (user, password, email, cpu, ram, disk, slot, coin) values (?, ?, ?, ?, ?, ?, ?, ?)", (user, passwd, email, cpu, ram, disk, slot, coin))
+        cursor.execute("insert into user (user, password, email, cpu, ram, disk, slot, coin, verified) values (?, ?, ?, ?, ?, ?, ?, ?, 0)", (user, passwd, email, cpu, ram, disk, slot, coin))
     except Exception:
         return (False, "Username has been used.")
     conn.commit()
@@ -88,14 +164,6 @@ def chSID(sid):
 
 # print(chSID("s.CXToSbBpWYIVjc5aoYQILtYpU62iPsfjJFuxizGmrvNGktD6TZ63zUMLDWJVulo"))
 
-# pteroHeader
-headers = {
-  'Authorization': f'Bearer {pteroKey}',
-  'Content-Type': 'application/json',
-  'Accept': 'Application/vnd.pterodactyl.v1+json'
-}
-# pteroHeader
-
 def checkPteroUser(name):
     resp = requests.get(pteroHost+"/api/application/users?per_page=9999", headers=headers).json()
     if (resp.get("errors")): return (False, resp["errors"][0])
@@ -104,6 +172,29 @@ def checkPteroUser(name):
             if i["attributes"]["username"] == name:
                 return (True, i["attributes"])
         return (False, "nf")
+
+def getPteroAllocation(node_id, _random=False):
+    resp = requests.get(pteroHost+f"/api/application/nodes/{node_id}/allocations?per_page=9999", headers=headers).json()
+    if (resp.get("errors")): return (False, resp["errors"][0])
+    r = resp["data"]
+    i = 0
+    while (r[i]["attributes"]["assigned"]):
+        if _random: i = random.randint(0, len(r)-1)
+        else:
+            if (i == len(r)-1): return (False, )
+            else: i+=1
+    return (True, r[i]["attributes"])
+
+# print(getPteroAllocation(1))
+
+def listPteroNode(name):
+    resp = requests.get(pteroHost+"/api/application/nodes?per_page=9999", headers=headers).json()
+    if (resp.get("errors")): return (False, resp["errors"][0])
+    for i in (resp["data"]):
+        if i["attributes"]["name"] == name:
+            return (True, i["attributes"])
+    return (False, "nf")
+
 
 def listPteroServer(name):
     userData = checkPteroUser(name)
@@ -126,7 +217,56 @@ def listPteroServer(name):
             tDisk+= i["attributes"]["limits"]["disk"]/1024
     return (True, uDt, tCPU, tDisk, tRam)
 
-# print(listPteroServer("h3l2f"))
+def createPteroServer(name, user, node, egg, cpu, ram, disk):
+    uDt = getUser(user)
+    uPdt = checkPteroUser(user)
+    uSv = listPteroServer(user)
+
+    if (uDt[0] == False) or (uPdt[0] == False):
+        return (False, "User not found.", {
+            "uDt": uDt,
+            "uPdt": uPdt
+        })
+    eggs = config["eggs"]
+    if (egg not in list(eggs.keys())):
+        return (False, "Egg not found.")
+    egg = config["eggs"][egg]
+    
+    if node not in list(config["locations"].keys()):
+        return (False, "Node not found.")
+    
+    ucpu = uDt[1]["cpu"]-uSv[2] #pyright: ignore
+    udisk = uDt[1]["disk"]-uSv[3] #pyright: ignore
+    uram = uDt[1]["ram"]-uSv[4] #pyright: ignore
+
+    if (ucpu < cpu):
+        return (False, "Not enough cpu.")
+    elif (udisk < disk):
+        return (False, "Not enough disk.")
+    elif (uram < ram):
+        return (False, "Not enough ram.")
+    elif len(uSv[1]) >= uDt[1]["slot"]:
+        return (False, "Not enough slot.")
+    
+    data = egg["info"]
+    data["name"]=name
+    data["user"]=uPdt[1]["id"]
+    data["allocation"] = {
+            "default": getPteroAllocation(node)[1]["id"] #pyright:ignore
+        }
+    data["limits"] = {
+            "memory": ram*1024,
+            "swap": 0,
+            "disk": disk*1024,
+            "io": 500,
+            "cpu": cpu
+        }
+
+    resp = requests.post(pteroHost+"/api/application/servers", json=data, headers=headers).json()
+    if (resp.get("errors")): return (False, resp["errors"][0])
+    return (True, resp)
+
+# print(createPteroServer("h3l2f", "h3l2f", "1", "vnljv", 100, 1.0, 1.0))
 
 def chMX(domain):
     try:

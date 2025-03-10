@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/statics/css/general.css">
     <link rel="stylesheet" href="/statics/css/dash_css.css">
-    <link rel="stylesheet" href="/statics/css/dash.css">
-    <script>
+    <link rel="stylesheet" href="/statics/css/server.css">
+    <!-- <script>
         document.onreadystatechange = function() {
             if (document.readyState == 'complete') {
                 $(".loading").fadeOut(200)
@@ -18,12 +18,13 @@
                 document.onreadystatechange = () => {}
             }
         };
-    </script>
+    </script> -->
+    <script src="/statics/js/server.js"></script>
     <script src="/statics/js/dash.js"></script>
-    <title>Dashboard - {{name}}</title>
+    <title>Your servers - {{name}}</title>
 </head>
 <body>
-    <div class="loading">
+    <div style="display: none" class="loading">
         <div class="loader"></div>
     </div>
     <div class="nav">
@@ -58,31 +59,27 @@
     </div>
     <div class="main">
         <main>
-            <div class="welcome">
-                <h2>{{bigWel}}</h2>
-                <h4>{{smallWel}}</h4>
+            <div class="title">
+                <button>
+                    <i class="fa-regular fa-plus"></i>
+                    Create
+                </button>
+                <h2>Servers</h2>
+                <h4>Your server will appear here!</h4>
             </div>
-            <div class="info">
-                <div class="item">
-                    <div class="name">cpu:</div>
-                    <div class="i">{{cpu}}%/{{dcpu}}%</div>
-                </div>
-                <div class="item">
-                    <div class="name">ram:</div>
-                    <div class="i">{{ram}}GB/{{dram}}GB</div>
-                </div>
-                <div class="item">
-                    <div class="name">disk:</div>
-                    <div class="i">{{disk}}GB/{{ddisk}}GB</div>
-                </div>
-                <div class="item">
-                    <div class="name">slot:</div>
-                    <div class="i">{{slot}}/{{dslot}}</div>
-                </div>
-            </div>
-            <div class="helper">
-                <h4>Look like you don't know where the panel is?</h4>
-                <h4>Find <a href="/panel">it</a> if you can;)</h4>
+            <div class="sv">
+                {% for i in sv %}
+                <a href="/server/{{i['identifier']}}">
+                    <div class="sio">
+                        <h2 style="overflow-x: hidden;
+                                   text-overflow: ellipsis;">{{i["name"]}}</h2>
+                        <h6>{{i['identifier']}}</h6>
+                        <div class="info" style="margin-top: 5px"><h4>CPU:</h4><h4>{{i["limits"]["cpu"]}}%</h4></div>
+                        <div class="info" style="margin-top: 5px"><h4>Ram:</h4><h4>{{i["limits"]["memory"]/1024}}GB</h4></div>
+                        <div class="info" style="margin-top: 5px"><h4>Disk:</h4><h4>{{i["limits"]["disk"]/1024}}GB</h4></div>
+                    </div>
+                </a>
+                {% endfor %}
             </div>
         </main>
         <footer>

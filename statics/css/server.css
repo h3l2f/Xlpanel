@@ -1,0 +1,59 @@
+main {
+    padding: 20px;
+}
+
+main .title * {
+    font-weight: 100;
+    user-select: none;
+}
+
+main .title button {
+    float: right;
+    border: none;
+    padding: 10px;
+    width: 100px;
+    background-color: transparent;
+    color: white;
+    border: dashed 2px #0000aa;
+    border-radius: 30px;
+    margin-top: 5px;
+    transition: 0.2s;
+}
+
+main .title button:hover {
+    border-style: solid;
+}
+
+main .title button:active {
+    background-color: #0000aa;
+}
+
+main .sv {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    user-select: none;
+}
+
+main .sv a {
+    color: white;
+}
+
+main .sv a .sio {
+    padding: 15px;
+    border: dashed 2px #0000aa;
+    border-radius: 16px;
+    width: 100%;
+    min-width: 170px;
+    max-width: 300px;
+    margin: 20px 0;
+}
+
+main .sv a .sio * {
+    font-weight: 100;
+}
+
+main .sv a .sio .info {
+    display: flex;
+    justify-content: space-between;
+}

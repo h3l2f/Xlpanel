@@ -4,14 +4,17 @@ import os
 from werkzeug.exceptions import HTTPException
 import helper
 import datetime
+import sendmail
 
 app = Flask(__name__, template_folder="templates", static_folder="statics")
 sock = Sock(app)
 app.jinja_env.globals.update(list=list)
 app.jinja_env.globals.update(datetime=datetime)
+app.jinja_env.globals.update(request=request)
 
 with open("config.json","r", encoding="utf-8") as f:
     config = json.load(f)
+
 # general
 name = config["name"]
 ver = config["version"]

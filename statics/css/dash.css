@@ -3,7 +3,7 @@ main {
     overflow-x: auto;
 }
 
-main .welcome {
+main .welcome, main .helper {
     padding: 15px;
     margin: 15px;
     border: dashed 2px #0000aa;
@@ -11,7 +11,7 @@ main .welcome {
     background-color: #0000aa20;
 }
 
-main .welcome * {
+main :where(.welcome, .helper) * {
     font-weight: 100;
 }
 
