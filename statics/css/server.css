@@ -1,5 +1,6 @@
 main {
     padding: 20px;
+    opacity: 0;
 }
 
 main .title * {
@@ -37,6 +38,7 @@ main .sv {
 
 main .sv a {
     color: white;
+    margin-top: 20px;
 }
 
 main .sv a .sio {
@@ -46,7 +48,6 @@ main .sv a .sio {
     width: 100%;
     min-width: 170px;
     max-width: 300px;
-    margin: 20px 0;
 }
 
 main .sv a .sio * {
@@ -56,4 +57,116 @@ main .sv a .sio * {
 main .sv a .sio .info {
     display: flex;
     justify-content: space-between;
+}
+
+.crSp {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9;
+    background-color: #000010bb;
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    user-select: none;
+}
+
+.crSp .form {
+    width: 100%;
+    max-width: 500px;
+    height: fit-content;
+    min-height: 200px;
+    max-height: 400px;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 16px;
+    border: dashed 2px #0000aa;
+    padding: 10px;
+}
+
+.crSp .form form .inp {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.crSp .form form .inp input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 2px #0000aa20;
+    font-size: 16px;
+    padding: 0 5px 0 5px;
+    color: white;
+    transition: 0.3s;
+}
+
+.crSp .form form .inp input:focus {
+    outline: none;
+    border-bottom-color: #0000aa;
+}
+
+.crSp .form form .inp select {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 2px #0000aa20;
+    font-size: 16px;
+    padding: 0 5px 0 5px;
+    color: white;
+    transition: 0.3s;
+}
+
+.crSp .form form .inp select:focus {
+    outline: none;
+    border-bottom-color: #0000aa;
+}
+
+.crSp .form form .inp select * {
+    background-color: #0000aa;
+}
+
+.crSp .form form .ann {
+    display: flex;
+    gap: 10px;
+}
+
+.crSp .form form .btn {
+    width: fit-content;
+    margin: auto;
+}
+
+.crSp .form form .btn input {
+    background-color: transparent;
+    color: white;
+    border: dashed 1px #0000aa;
+    padding: 5px 10px;
+    border-radius: 16px;
+    transition: 0.3s;
+}
+
+.crSp .form form .btn input:hover {
+    border-style: solid;
+}
+
+.crSp .form form .btn input:active {
+    background-color: #0000aa;
+}
+
+main :where(.err, .done) {
+    user-select: none;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #aa000030;
+    border: dashed 2px #aa0000;
+    border-radius: 16px;
+}
+
+main :where(.err, .done) * {
+    font-weight: 100;
+}
+
+main .done {
+    background-color: #00aa0030;
+    border: dashed 2px #00aa00;
 }

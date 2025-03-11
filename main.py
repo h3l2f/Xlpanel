@@ -34,8 +34,9 @@ dft = {
     "coin": config["default"]["coin"]
 }
 
-# eggs
-eggsList = list(config["eggs"].keys())
+# list
+eggsList = config["eggs"]
+nodeList = config["locations"]
 
 # menu
 menuItems = {

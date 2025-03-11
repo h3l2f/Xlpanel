@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/statics/css/general.css">
     <link rel="stylesheet" href="/statics/css/dash_css.css">
     <link rel="stylesheet" href="/statics/css/server.css">
-    <!-- <script>
+    <script>
         document.onreadystatechange = function() {
             if (document.readyState == 'complete') {
                 $(".loading").fadeOut(200)
@@ -18,13 +18,13 @@
                 document.onreadystatechange = () => {}
             }
         };
-    </script> -->
+    </script>
     <script src="/statics/js/server.js"></script>
     <script src="/statics/js/dash.js"></script>
     <title>Your servers - {{name}}</title>
 </head>
 <body>
-    <div style="display: none" class="loading">
+    <div class="loading">
         <div class="loader"></div>
     </div>
     <div class="nav">
@@ -57,16 +57,81 @@
             <h6>Coins: {{coin}}</h6>
         </div>
     </div>
+    <div class="crSp" style="display: none">
+        <div class="form">
+            <div class="ld">
+                <div class="loader"></div>
+            </div>
+            <h2 style="margin-bottom: 10px; float: right; font-weight: 100;">
+            <a style="color: #aa0000" href="javascript: $('.crSp').fadeToggle(100);">
+                <i class="fa-solid fa-xmark"></i>
+            </a></h2>
+            <h2 style="margin-bottom: 10px; font-weight: 100;">Create</h2>
+            <form action="/servers/create">
+                <div class="inp">
+                    <input type="text" name="name" placeholder="Name" required>
+                </div>
+                <div class="ann">
+                    <div class="inp">
+                        <input type="number" min="1" max="9999" maxlength="4" minlength="1" name="cpu" placeholder="CPU (%)" autocomplete="off" required>
+                    </div>
+                    <div class="inp">
+                        <input type="number" min="1" max="9999" maxlength="4" minlength="1" name="ram" placeholder="Ram (GB)" autocomplete="off" required>
+                    </div>
+                    <div class="inp">
+                        <input type="number" min="1" max="9999" maxlength="4" minlength="1" name="disk" placeholder="Disk (GB)" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="inp">
+                    <select name="node">
+                        <optgroup label="_">
+                            <option value="_">Choose node</option>
+                        </optgroup>
+                        <optgroup label="Nodes">
+                            {% for i in list(nodes.keys()) %}
+                            <option value="{{i}}">{{nodes[i]["name"]}}</option>
+                            {% endfor %}
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="inp">
+                    <select name="egg">
+                        <optgroup label="_">
+                            <option value="_">Choose egg</option>
+                        </optgroup>
+                        <optgroup label="Eggs">
+                            {% for i in list(eggs.keys()) %}
+                            <option value="{{i}}">{{eggs[i]["name"]}}</option>
+                            {% endfor %}
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="btn">
+                    <input type="submit" value="Create">
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="main">
         <main>
             <div class="title">
-                <button>
+                <button onclick="$('.crSp').fadeToggle(100);">
                     <i class="fa-regular fa-plus"></i>
                     Create
                 </button>
                 <h2>Servers</h2>
                 <h4>Your server will appear here!</h4>
             </div>
+            {% if error!="none" and error %}
+            <div class="err">
+                <h3>Error on create:</h3>
+                <h4>{{error}}</h4>
+            </div>
+            {% elif error=="none" %}
+            <div class="done">
+                <h3>Your server has been created.</h3>
+            </div>
+            {% endif %}
             <div class="sv">
                 {% for i in sv %}
                 <a href="/server/{{i['identifier']}}">
