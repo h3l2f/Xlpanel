@@ -92,8 +92,6 @@ def getUser(user):
         }
     return (True, result)
 
-# print(getUser("h3l2f"))
-
 def checkVcode(user, code):
     conn = db.connect()
     cursor = conn.cursor()
@@ -163,8 +161,6 @@ def chSID(sid):
         }
         return (True, result)
 
-# print(chSID("s.CXToSbBpWYIVjc5aoYQILtYpU62iPsfjJFuxizGmrvNGktD6TZ63zUMLDWJVulo"))
-
 def checkPteroUser(name):
     resp = requests.get(pteroHost+"/api/application/users?per_page=9999", headers=headers).json()
     if (resp.get("errors")): return (False, resp["errors"][0])
@@ -185,8 +181,6 @@ def getPteroAllocation(node_id, _random=False):
             if (i == len(r)-1): return (False, )
             else: i+=1
     return (True, r[i]["attributes"])
-
-# print(getPteroAllocation(1))
 
 def listPteroNode(name):
     resp = requests.get(pteroHost+"/api/application/nodes?per_page=9999", headers=headers).json()
@@ -267,13 +261,10 @@ def createPteroServer(name, user, node, egg, cpu, ram, disk):
     if (resp.get("errors")): return (False, resp["errors"][0])
     return (True, resp)
 
-# print(createPteroServer("h3l2f", "h3l2f", "1", "vnljv", 100, 1.0, 1.0))
 def delPteroServer(id):
     resp = requests.delete(pteroHost+f"/api/application/servers/{id}", headers=headers)
     if (resp.status_code!=204): return (False, resp.json()["errors"][0])
     return (True,)
-
-# print(delPteroServer(1))
 
 def chMX(domain):
     try:

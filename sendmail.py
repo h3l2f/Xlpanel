@@ -28,3 +28,23 @@ def sendVerify(rEml, code):
         return (True, )
     except Exception as e:
         return (False, e)
+
+def sendrspwd(rEml, passwd):
+    try:
+        msg = MIMEMultipart('alternative')
+        msg['From'] = config["mail"]["smtp"]["from"]
+        msg['To'] = rEml
+        msg['Subject'] = f"Reset password - {config['name']}"
+
+        with app.app_context():
+            ctn = render_template("forgotPass.html", name=config["name"], passwd=passwd)
+
+        ctn = MIMEText(ctn, 'html')
+        msg.attach(ctn)
+
+        with smtplib.SMTP_SSL(config["mail"]["smtp"]["host"], config["mail"]["smtp"]["port"]) as server:
+            server.login(config["mail"]["smtp"]["user"], config["mail"]["smtp"]["password"])
+            server.sendmail(config["mail"]["smtp"]["from"], rEml, msg.as_string())
+        return (True, )
+    except Exception as e:
+        return (False, e)

@@ -17,7 +17,8 @@ def connect():
                     disk bigint(255),
                     ram bigint(255),
                     coin bigint(255),
-                    verified int(1)
+                    verified int(1),
+                    lastSend int(255)
                 )''')
     cursor.execute('''CREATE TABLE IF NOT EXISTS session
                 (

@@ -56,7 +56,6 @@ def accChange():
         else:
             conn = db.connect()
             cursor = conn.cursor()
-
             cursor.execute("update user set password=? where user=?", (ende.encode(nwpwd),check[1]["user"]))
             conn.commit()
             conn.close()

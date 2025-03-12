@@ -185,7 +185,6 @@ main .isv .sio {
     border: dashed 2px #0000aa;
     border-radius: 16px;
     width: 100%;
-    max-width: 1000px;
 }
 
 main .isv .sio * {

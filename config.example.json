@@ -1,15 +1,27 @@
 {
     "name": "Xlpanel",
-    "pterodactyl": {
-        "host": "",
-        "key": ""
-    },
     "version": "0.0.1",
     "codename": "blyat",
+    "pterodactyl": {
+        "host": "your_pterodactyl_host",
+        "key": "your_pterodactyl_api_key"
+    },
     "flask": {
         "host": "0.0.0.0",
         "port": 5000,
-        "debug": true
+        "debug": false
+    },
+    "mail": {
+        "smtp": {
+            "host": "smtp.gmail.com",
+            "port": 465,
+            "user": "",
+            "password": "",
+            "_pwdComment": "If you are using gmail, use app password (generate in google account)",
+            "from": "Xlpanel <h3l2f@h3l2f.site>",
+            "_fromComment": "Use name<email> to set the sender name."
+        },
+        "_smtpComment": "required!"
     },
     "database": "xlpanel.db",
     "db_comment": "Only support sqlite, please provide a file name, not link!",
@@ -22,19 +34,9 @@
     },
     "eggs": {
         "bungeecord": {
-            "display": "BungeeCord",
-            "minimum": {
-                "ram": 1024,
-                "disk": 1024,
-                "cpu": 75
-            },
-            "maximum": {
-                "ram": null,
-                "disk": null,
-                "cpu": null
-            },
+            "name": "BungeeCord",
             "info": {
-                "egg": 3,
+                "egg": 5,
                 "docker_image": "ghcr.io/pterodactyl/yolks:java_17",
                 "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
                 "environment": {
@@ -42,25 +44,15 @@
                     "BUNGEE_VERSION": "latest"
                 },
                 "feature_limits": {
-                    "databases": 4,
-                    "backups": 4
+                    "databases": 0,
+                    "backups": 0
                 }
             }
         },
         "vnljv": {
-            "display": "Minecraft Vanila",
-            "minimum": {
-                "ram": 1024,
-                "disk": 1024,
-                "cpu": 100
-            },
-            "maximum": {
-                "ram": null,
-                "disk": null,
-                "cpu": null
-            },
+            "name": "Minecraft Vanila",
             "info": {
-                "egg": 2,
+                "egg": 4,
                 "docker_image": "ghcr.io/pterodactyl/yolks:java_17",
                 "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}}",
                 "environment": {
@@ -68,25 +60,15 @@
                     "VANILLA_VERSION": "latest"
                 },
                 "feature_limits": {
-                    "databases": 4,
-                    "backups": 4
+                    "databases": 0,
+                    "backups": 0
                 }
             }
         },
         "paper": {
-          "display": "Paper",
-          "minimum": {
-            "ram": 1024,
-            "disk": 1024,
-            "cpu": 100
-          },
-          "maximum": {
-            "ram": null,
-            "disk": null,
-            "cpu": null
-          },
+          "name": "Paper",
           "info": {
-            "egg": 1,
+            "egg": 3,
             "docker_image": "ghcr.io/pterodactyl/yolks:java_17",
             "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
             "environment": {
@@ -100,5 +82,26 @@
             }
           }
         }
+    },
+    "locations": {
+        "1": {
+            "name": "lorem"
+        },
+        "2": {
+            "name": "lorem1"
+        }
+    },
+    "afk": {
+        "enable": true,
+        "coinPerStage": 10,
+        "stageTime": 60
+    },
+    "store": {
+        "enable": true,
+        "cpu": [100, 100],
+        "disk": [200, 1],
+        "ram": [250, 1],
+        "slot": [1500, 1],
+        "_comment": "[price, amount(int)]"
     }
 }
