@@ -1,6 +1,6 @@
 main {
     opacity: 0;
-    overflow-x: auto;
+    user-select: none;
 }
 
 main .welcome, main .helper {

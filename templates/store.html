@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/statics/css/general.css">
     <link rel="stylesheet" href="/statics/css/dash_css.css">
-    <link rel="stylesheet" href="/statics/css/dash.css">
+    <link rel="stylesheet" href="/statics/css/store.css">
     <link rel="shortcut icon" href="/statics/img/logo.png" type="image/png">
     <script>
         document.onreadystatechange = function() {
@@ -20,8 +20,9 @@
             }
         };
     </script>
+    <script src="/statics/js/store.js"></script>
     <script src="/statics/js/dash.js"></script>
-    <title>Dashboard - {{name}}</title>
+    <title>Store - {{name}}</title>
 </head>
 <body>
     <div class="loading">
@@ -59,31 +60,66 @@
     </div>
     <div class="main">
         <main>
-            <div class="welcome">
-                <h2>{{bigWel}}</h2>
-                <h4>{{smallWel}}</h4>
+            <div class="title">
+                <h2>Store</h2>
+                <h4>You can buy anything you want here!</h4>
+                <h6>Of couse, server resource:)</h6>
             </div>
-            <div class="info">
-                <div class="item">
-                    <div class="name">cpu:</div>
-                    <div class="i">{{cpu}}%/{{dcpu}}%</div>
-                </div>
-                <div class="item">
-                    <div class="name">ram:</div>
-                    <div class="i">{{ram}}GB/{{dram}}GB</div>
-                </div>
-                <div class="item">
-                    <div class="name">disk:</div>
-                    <div class="i">{{disk}}GB/{{ddisk}}GB</div>
-                </div>
-                <div class="item">
-                    <div class="name">slot:</div>
-                    <div class="i">{{slot}}/{{dslot}}</div>
-                </div>
+            {% if error!="none" and error %}
+            <div class="err">
+                <h3>Error on purchasing:</h3>
+                <h4>{{error}}</h4>
             </div>
-            <div class="helper">
-                <h4>Look like you don't know where the panel is?</h4>
-                <h4>Find <a href="/panel">it</a> if you can;)</h4>
+            {% elif error=="none" %}
+            <div class="done">
+                <h3>Done. Now you can use the resouces.</h3>
+            </div>
+            {% endif %}
+            <div class="items">
+                <div class="it">
+                    <h3>CPU</h3>
+                    <select name="cpu">
+                        {% for i in range(1, 10+1) %}
+                        <option value="{{i}}">
+                            {{store["cpu"][1]*i}}% - {{store["cpu"][0]*i}} coin(s)
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <button onclick="buy(this)">Buy</button>
+                </div>
+                <div class="it">
+                    <h3>Ram</h3>
+                    <select name="ram">
+                        {% for i in range(1, 10+1) %}
+                        <option value="{{i}}">
+                            {{store["ram"][1]*i}}GB - {{store["ram"][0]*i}} coin(s)
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <button onclick="buy(this)">Buy</button>
+                </div>
+                <div class="it">
+                    <h3>Disk</h3>
+                    <select name="disk">
+                        {% for i in range(1, 10+1) %}
+                        <option value="{{i}}">
+                            {{store["disk"][1]*i}}GB - {{store["disk"][0]*i}} coin(s)
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <button onclick="buy(this)">Buy</button>
+                </div>
+                <div class="it">
+                    <h3>Slot</h3>
+                    <select name="slot">
+                        {% for i in range(1, 10+1) %}
+                        <option value="{{i}}">
+                            {{store["slot"][1]*i}} slot(s) - {{store["slot"][0]*i}} coin(s)
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <button onclick="buy(this)">Buy</button>
+                </div>
             </div>
         </main>
         <footer>
@@ -96,5 +132,9 @@
             </div>
         </footer>
     </div>
+    <form id="hehe" action="/store/buy/" style="display: none">
+        <input type="text" name="item" id="sbi">
+        <input type="text" name="amount" id="sba">
+    </form>
 </body>
 </html>

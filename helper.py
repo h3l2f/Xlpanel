@@ -154,6 +154,7 @@ def chSID(sid):
         result = cursor.fetchall()
         result = {
             "user": result[0][0],
+            "pwd": result[0][1],
             "slot": result[0][3],
             "cpu": result[0][4],
             "disk": result[0][5],

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/statics/css/general.css">
     <link rel="stylesheet" href="/statics/css/dash_css.css">
-    <link rel="stylesheet" href="/statics/css/dash.css">
+    <link rel="stylesheet" href="/statics/css/account.css">
     <link rel="shortcut icon" href="/statics/img/logo.png" type="image/png">
     <script>
         document.onreadystatechange = function() {
@@ -20,8 +20,10 @@
             }
         };
     </script>
+    <script src="/statics/js/account.js"></script>
     <script src="/statics/js/dash.js"></script>
-    <title>Dashboard - {{name}}</title>
+    <script src="/statics/js/signF.js"></script>
+    <title>Your account - {{name}}</title>
 </head>
 <body>
     <div class="loading">
@@ -59,31 +61,61 @@
     </div>
     <div class="main">
         <main>
-            <div class="welcome">
-                <h2>{{bigWel}}</h2>
-                <h4>{{smallWel}}</h4>
+            <div class="title">
+                <h2>Account</h2>
+                <h4>Here is your information about your account!</h4>
             </div>
+            
+            {% if error!="changed" and error %}
+            <div class="err">
+                <h3>Error on changing password:</h3>
+                <h4>{{error}}</h4>
+            </div>
+            {% elif error=="changed" %}
+            <div class="done">
+                <h3>Your password has been changed.</h3>
+                <h4>Remember: we don't change your pterodactyl account password!</h4>
+            </div>
+            {% endif %}
+
             <div class="info">
-                <div class="item">
-                    <div class="name">cpu:</div>
-                    <div class="i">{{cpu}}%/{{dcpu}}%</div>
+                <div class="r">
+                    <h4>Username:</h4>
+                    <h3>{{user}}</h3>
                 </div>
-                <div class="item">
-                    <div class="name">ram:</div>
-                    <div class="i">{{ram}}GB/{{dram}}GB</div>
+                <div class="r">
+                    <h4>Role:</h4>
+                    <h3>{{"admin" if isAdmin else "user"}}</h3>
                 </div>
-                <div class="item">
-                    <div class="name">disk:</div>
-                    <div class="i">{{disk}}GB/{{ddisk}}GB</div>
+                <div class="cpass">
+                    <h3 style="font-weight: 100">Change password</h3>
+                    <form method="post" action="/account/change">
+                        <div class="inp">
+                            <input type="password" name="crpasswd" placeholder="Current password" required>
+                            <button type="button" onclick="passwdToggle(this, 'crpasswd')">
+                                <i d="n" class="fa-regular fa-eye"></i>
+                                <i d="f" class="fa-regular fa-eye-slash" style="display: none"></i>
+                            </button>
+                        </div>
+                        <div class="inp">
+                            <input type="password" name="nwpasswd" placeholder="New password" minlength="8" required>
+                            <button type="button" onclick="passwdToggle(this, 'nwpasswd')">
+                                <i d="n" class="fa-regular fa-eye"></i>
+                                <i d="f" class="fa-regular fa-eye-slash" style="display: none"></i>
+                            </button>
+                        </div>
+                        <div class="inp">
+                            <input type="password" name="cnwpasswd" placeholder="Confirm password" minlength="8" required>
+                            <button type="button" onclick="passwdToggle(this, 'cnwpasswd')">
+                                <i d="n" class="fa-regular fa-eye"></i>
+                                <i d="f" class="fa-regular fa-eye-slash" style="display: none"></i>
+                            </button>
+                        </div>
+                        <div class="submit">
+                            <input type="submit" value="Change password">
+                        </div>
+                    </form>
                 </div>
-                <div class="item">
-                    <div class="name">slot:</div>
-                    <div class="i">{{slot}}/{{dslot}}</div>
-                </div>
-            </div>
-            <div class="helper">
-                <h4>Look like you don't know where the panel is?</h4>
-                <h4>Find <a href="/panel">it</a> if you can;)</h4>
             </div>
         </main>
         <footer>

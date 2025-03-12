@@ -29,5 +29,5 @@ $(document).ready(()=>{
           return;
         }
         event.preventDefault();
-      } );
+      });
 })

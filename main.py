@@ -12,6 +12,8 @@ app.jinja_env.globals.update(list=list)
 app.jinja_env.globals.update(datetime=datetime)
 app.jinja_env.globals.update(request=request)
 
+app.config['SOCK_SERVER_OPTIONS'] = {'ping_interval': 2}
+
 with open("config.json","r", encoding="utf-8") as f:
     config = json.load(f)
 
@@ -60,10 +62,20 @@ menuItems = {
         "link": "/account",
         "icon": """<i class="fa-solid fa-user"></i>"""
     }
-    
 }
 
-routeFile = os.listdir("routes") 
+# afk
+afk = config["afk"]
+store = config["store"]
+
+routeFile = os.listdir("routes")
+if not afk["enable"]:
+    routeFile.remove("afkpage.py")
+    routeFile.remove("afk_ws.py")
+    menuItems.pop("Afk")
+if not store["enable"]:
+    routeFile.remove("store.py")
+    menuItems.pop("Store")
 for i in routeFile:
     if "__" in i: continue
     exec(f"import routes.{i.split('.')[0]}")

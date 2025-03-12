@@ -1,0 +1,81 @@
+main {
+    padding: 20px;
+    opacity: 0;
+}
+
+main .title * {
+    font-weight: 100;
+    user-select: none;
+}
+
+main .items {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+main .items .it {
+    padding: 20px;
+    margin-top: 20px;
+    border: dashed 2px #0000aa;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 200px;
+}
+
+main .items .it select {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: white;
+    margin-top: 10px;
+    border-bottom: solid 2px #0000aa20;
+    transition: 0.3s;
+}
+
+main .items .it select:focus {
+    outline: none;
+    border-bottom-color: #0000aa;
+}
+
+main .items .it select * {
+    background-color: #0040ff;
+}
+
+main .items .it button {
+    width: 100%;
+    margin-top: 10px;
+    background-color: transparent;
+    color: white;
+    border: dashed 1px #0000aa;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+main .items .it button:hover {
+    border-style: solid;
+}
+
+main .items .it button:active {
+    background-color: #0000aa;
+}
+
+main :where(.err, .done) {
+    user-select: none;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #aa000030;
+    border: dashed 2px #aa0000;
+    border-radius: 16px;
+}
+
+main :where(.err, .done) * {
+    font-weight: 100;
+}
+
+main .done {
+    background-color: #00aa0030;
+    border: dashed 2px #00aa00;
+}
