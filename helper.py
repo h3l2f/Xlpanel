@@ -268,6 +268,12 @@ def createPteroServer(name, user, node, egg, cpu, ram, disk):
     return (True, resp)
 
 # print(createPteroServer("h3l2f", "h3l2f", "1", "vnljv", 100, 1.0, 1.0))
+def delPteroServer(id):
+    resp = requests.delete(pteroHost+f"/api/application/servers/{id}", headers=headers)
+    if (resp.status_code!=204): return (False, resp.json()["errors"][0])
+    return (True,)
+
+# print(delPteroServer(1))
 
 def chMX(domain):
     try:

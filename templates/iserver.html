@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/statics/css/general.css">
     <link rel="stylesheet" href="/statics/css/dash_css.css">
-    <link rel="stylesheet" href="/statics/css/store.css">
+    <link rel="stylesheet" href="/statics/css/server.css">
     <link rel="shortcut icon" href="/statics/img/logo.png" type="image/png">
     <script>
         document.onreadystatechange = function() {
@@ -20,9 +20,9 @@
             }
         };
     </script>
-    <script src="/statics/js/store.js"></script>
+    <script src="/statics/js/server.js"></script>
     <script src="/statics/js/dash.js"></script>
-    <title>Store - {{name}}</title>
+    <title>Your servers - {{name}}</title>
 </head>
 <body>
     <div class="loading">
@@ -61,66 +61,29 @@
     <div class="main">
         <main>
             <div class="title">
-                <h2>Store</h2>
-                <h4>You can buy anything you want here!</h4>
-                <h6>Of course, server resource:)</h6>
+                <h2>Server detail</h2>
+                {% if not error %}
+                <h4>Here is the detail info for {{i["identifier"]}}</h4>
+                {% endif %}
             </div>
-            {% if error!="none" and error %}
+            {% if error %}
             <div class="err">
-                <h3>Error on purchasing:</h3>
-                <h4>{{error}}</h4>
+                <h3>Error when loading:</h3>
+                <h4>You don't have permission to modify this server.</h4>
             </div>
-            {% elif error=="none" %}
-            <div class="done">
-                <h3>Done. Now you can use the resouces.</h3>
+            {% else %}
+            <div class="isv">
+                <div class="sio">
+                    <h2 style="overflow-x: hidden;
+                                text-overflow: ellipsis;">{{i["name"]}}</h2>
+                    <h6 style="margin-bottom: 20px">{{i['identifier']}}</h6>
+                    <div class="info" style="margin-top: 5px"><h4>CPU:</h4><h4>{{i["limits"]["cpu"]}}%</h4></div>
+                    <div class="info" style="margin-top: 5px"><h4>Ram:</h4><h4>{{i["limits"]["memory"]/1024}}GB</h4></div>
+                    <div class="info" style="margin-top: 5px"><h4>Disk:</h4><h4>{{i["limits"]["disk"]/1024}}GB</h4></div>
+                    <button onclick="del()">Delete</button>
+                </div>
             </div>
             {% endif %}
-            <div class="items">
-                <div class="it">
-                    <h3>CPU</h3>
-                    <select name="cpu">
-                        {% for i in range(1, 10+1) %}
-                        <option value="{{i}}">
-                            {{store["cpu"][1]*i}}% - {{store["cpu"][0]*i}} coin(s)
-                        </option>
-                        {% endfor %}
-                    </select>
-                    <button onclick="buy(this)">Buy</button>
-                </div>
-                <div class="it">
-                    <h3>Ram</h3>
-                    <select name="ram">
-                        {% for i in range(1, 10+1) %}
-                        <option value="{{i}}">
-                            {{store["ram"][1]*i}}GB - {{store["ram"][0]*i}} coin(s)
-                        </option>
-                        {% endfor %}
-                    </select>
-                    <button onclick="buy(this)">Buy</button>
-                </div>
-                <div class="it">
-                    <h3>Disk</h3>
-                    <select name="disk">
-                        {% for i in range(1, 10+1) %}
-                        <option value="{{i}}">
-                            {{store["disk"][1]*i}}GB - {{store["disk"][0]*i}} coin(s)
-                        </option>
-                        {% endfor %}
-                    </select>
-                    <button onclick="buy(this)">Buy</button>
-                </div>
-                <div class="it">
-                    <h3>Slot</h3>
-                    <select name="slot">
-                        {% for i in range(1, 10+1) %}
-                        <option value="{{i}}">
-                            {{store["slot"][1]*i}} slot(s) - {{store["slot"][0]*i}} coin(s)
-                        </option>
-                        {% endfor %}
-                    </select>
-                    <button onclick="buy(this)">Buy</button>
-                </div>
-            </div>
         </main>
         <footer>
             <div class="text">
@@ -132,9 +95,5 @@
             </div>
         </footer>
     </div>
-    <form id="hehe" action="/store/buy/" style="display: none">
-        <input type="text" name="item" id="sbi">
-        <input type="text" name="amount" id="sba">
-    </form>
 </body>
 </html>

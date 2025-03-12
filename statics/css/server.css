@@ -170,3 +170,48 @@ main .done {
     background-color: #00aa0030;
     border: dashed 2px #00aa00;
 }
+
+/* iserver.html */
+
+main .isv {
+    margin: 20px auto;
+    user-select: none;
+    width: 100%;
+    max-width: 1000px;
+}
+
+main .isv .sio {
+    padding: 15px;
+    border: dashed 2px #0000aa;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+main .isv .sio * {
+    font-weight: 100;
+}
+
+main .isv .sio .info {
+    display: flex;
+    justify-content: space-between;
+}
+
+main .isv .sio button {
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    border: dashed 1px #aa0000;
+    margin-top: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+main .isv .sio button:hover {
+    border-style: solid;
+}
+
+main .isv .sio button:active {
+    background-color: #aa0000;
+}
