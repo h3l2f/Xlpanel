@@ -2,3 +2,4 @@ flask
 flask-sock
 flask-cors
 bcrypt==4.1.1
+dnspython
