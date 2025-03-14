@@ -90,4 +90,11 @@ python main.py
 
 - To change the icon, please upload your icon into `statics/img` folder and replace the `logo.png` with your new icon.
 
+# Pterofdactyl theme
+<img src="https://i.imgur.com/PL3CRTX.png"></ing>
+
+* Now you can have a pterodactyl theme with our style for **free**!
+> [!WARNING]
+> Remember: Your pterodactyl need to have [Blueprint](https://blueprint.zip/) before you can apply the theme.
+
 ### **Enjoy your new client!**
