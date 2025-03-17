@@ -103,5 +103,11 @@
         "ram": [250, 1],
         "slot": [1500, 1],
         "_comment": "[price, amount(int)]"
+    },
+    "color": {
+        "primary": "",
+        "background": "",
+        "text": "",
+        "_comment": "We only support hex color!"
     }
 }
