@@ -105,9 +105,9 @@
         "_comment": "[price, amount(int)]"
     },
     "color": {
-        "primary": "",
-        "background": "",
-        "text": "",
+        "primary": "#0000aa",
+        "background": "000010",
+        "text": "white",
         "_comment": "We only support hex color!"
     }
 }
