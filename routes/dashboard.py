@@ -86,5 +86,8 @@ def dashboard():
             ddisk=check[1]["disk"],
             dslot=check[1]["slot"],
             mIt=menuItems,
+            pcolor = pcolor,
+            bcolor = bcolor,
+            tcolor = tcolor,
             loadTime=int((time.time()-beginT)*100000)/100000
         )

@@ -15,7 +15,8 @@ main .info {
     border-radius: 16px;
     margin: 20px auto;
     width: 100%;
-    max-width: 750px;}
+    max-width: 750px;
+}
 
 main .info .r {
     margin-bottom: 10px;

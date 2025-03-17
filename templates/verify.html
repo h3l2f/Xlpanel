@@ -72,9 +72,39 @@
 
         $(document).ready(()=>{
             $("#code").focus(()=>{
-                $("main").css("border-color", "#0000aa")
+                $("main").css("border-color", "{{pcolor}}")
             })
         })
     </script>
+
+    <!-- v0.2 -->
+    <style>
+        body {
+            background-color: {{bcolor}};
+        }
+        
+        * {
+            color: {{tcolor}} !important;
+        }
+
+        
+        main,
+        main input:focus,
+        main button {
+            border-color: {{pcolor}};
+        }
+
+        main button:disabled {
+            background-color: {{pcolor}}20;
+        }
+
+        main button:active {
+            background-color: {{pcolor}};
+        }
+
+        main input {
+            border-color: {{pcolor}}40;
+        }
+    </style>
 </body>
 </html>

@@ -24,6 +24,9 @@ def yacc():
             coin=check[1]["coin"],
             error = request.args.get("err", None),
             mIt=menuItems,
+            pcolor = pcolor,
+            bcolor = bcolor,
+            tcolor = tcolor,
             loadTime=int((time.time()-beginT)*100000)/100000
         )
 

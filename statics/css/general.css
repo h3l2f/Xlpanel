@@ -39,7 +39,7 @@ body, html {
 
 a {
     text-decoration: none;
-    color: rgb(0, 68, 255);
+    color: rgb(0, 68, 255) !important;
 }
 
 @keyframes showing {

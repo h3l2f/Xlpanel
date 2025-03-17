@@ -13,6 +13,9 @@ def fg():
         return render_template(
             "forgot.html",
             name=name,
+            pcolor = pcolor,
+            bcolor = bcolor,
+            tcolor = tcolor,
         )
     elif request.method == "POST":
         email = request.form.get("email","")

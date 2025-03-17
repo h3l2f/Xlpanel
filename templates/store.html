@@ -136,5 +136,65 @@
         <input type="text" name="item" id="sbi">
         <input type="text" name="amount" id="sba">
     </form>
+
+    <!-- v0.2 -->
+    <style>
+        body {
+            background-color: {{bcolor}};
+        }
+
+        .nav {
+            background-color: {{pcolor}}0a;
+            border-right-color: {{pcolor}};
+        }
+
+        * {
+            color: {{tcolor}} !important;
+        }
+
+        .nav .items a:hover .it,
+        main .items .it,
+        main .items .it select:focus,
+        main .items .it button  {
+            border-color: {{pcolor}};
+        }
+
+        main .items .it select{
+            border-color: {{pcolor}}20;
+        }
+
+        .nav .items a:active .it,
+        main .items .it select *,
+        main .items .it button:active {
+            background-color: {{pcolor}};
+        }
+
+        .nav .users {
+            background-color: {{pcolor}}30;
+        }
+
+        .nav #menuToggle {
+            background-color: {{pcolor}}20;
+        }
+
+        .nav .items .sp .it {
+            background-color: {{pcolor}} !important;
+        }
+
+        .main footer {
+            background-color: {{pcolor}}07;
+            border-color: {{pcolor}};
+        }
+        
+        .loading {
+            background-color: {{bcolor}}cc;
+        }
+
+        .loader,
+        .loader:before,
+        .loader:after {
+            --c:no-repeat linear-gradient({{pcolor}} 0 0);
+        }
+    </style>
 </body>
 </html>

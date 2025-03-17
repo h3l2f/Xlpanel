@@ -76,5 +76,57 @@
             </div>
         </footer>
     </div>
+
+    <!-- v0.2 -->
+    <style>
+        body {
+            background-color: {{bcolor}};
+        }
+        
+        * {
+            color: {{tcolor}} !important;
+        }
+
+
+        .nav {
+            background-color: {{pcolor}}0a;
+            border-right-color: {{pcolor}};
+        }
+
+        .nav .items a:hover .it {
+            border-color: {{pcolor}};
+        }
+
+        .nav .items a:active .it {
+            background-color: {{pcolor}};
+        }
+
+        .nav .users {
+            background-color: {{pcolor}}30;
+        }
+
+        .nav #menuToggle {
+            background-color: {{pcolor}}20;
+        }
+
+        .nav .items .sp .it {
+            background-color: {{pcolor}} !important;
+        }
+
+        .main footer {
+            background-color: {{pcolor}}07;
+            border-color: {{pcolor}};
+        }
+
+        .loading {
+            background-color: {{bcolor}}cc;
+        }
+
+        .loader,
+        .loader:before,
+        .loader:after {
+            --c:no-repeat linear-gradient({{pcolor}} 0 0);
+        }
+    </style>
 </body>
 </html>

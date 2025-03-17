@@ -21,6 +21,9 @@ with open("config.json","r", encoding="utf-8") as f:
 name = config["name"]
 ver = config["version"]
 codename = config["codename"]
+pcolor = config["color"]["primary"]
+bcolor = config["color"]["background"]
+tcolor = config["color"]["text"]
 
 # flask
 host = config["flask"]["host"]

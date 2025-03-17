@@ -158,5 +158,79 @@
             </div>
         </footer>
     </div>
+
+    <!-- v0.2 -->
+    <style>
+        body {
+            background-color: {{bcolor}};
+        }
+        
+        * {
+            color: {{tcolor}} !important;
+        }
+
+
+        .nav {
+            background-color: {{pcolor}}0a;
+            border-right-color: {{pcolor}};
+        }
+
+        .nav .items a:hover .it,
+        main .title button,
+        main .title button:active,
+        main .sv a .sio,
+        .crSp .form,
+        .crSp .form form .inp input:focus,
+        .crSp .form form .btn input {
+            border-color: {{pcolor}};
+        }
+
+        .crSp .form form .inp input,
+        .crSp .form form .inp select,
+        .crSp .form form .inp select:focus {
+            border-color: {{pcolor}}20;
+        }
+
+        .crSp .form form .inp select *,
+        .crSp .form form .btn input:active,
+        main .title button:active {
+            background-color: {{pcolor}};
+        }
+
+        .crSp {
+            background-color: {{bcolor}}bb;
+        }
+
+        .nav .items a:active .it {
+            background-color: {{pcolor}};
+        }
+
+        .nav .users {
+            background-color: {{pcolor}}30;
+        }
+
+        .nav #menuToggle {
+            background-color: {{pcolor}}20;
+        }
+
+        .nav .items .sp .it {
+            background-color: {{pcolor}} !important;
+        }
+
+        .main footer {
+            background-color: {{pcolor}}07;
+            border-color: {{pcolor}};
+        }
+        
+        .loading {
+            background-color: {{bcolor}}cc;
+        }
+
+        .loader,
+        .loader:before,
+        .loader:after {
+            --c:no-repeat linear-gradient({{pcolor}} 0 0);
+        }
+    </style>
 </body>
 </html>

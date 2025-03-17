@@ -5,11 +5,16 @@
 <img src="https://i.imgur.com/MWZZ9qJ.png"></ing>
 </div>
 
+# Update: ver 0.2 (sinii khleb)
+![v0.2](https://i.imgur.com/bwRUsJu.png)
+> Now you can personalize your client with any color you want.
+
 # Key features
 * Manage your pterodactyl server
 * Afk for coins
 * Admin page
 * Easy to use
+* Customize your client with your favourite color
 
 # Require
 - Python 3.10 or higher.
