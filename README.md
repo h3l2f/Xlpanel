@@ -1,7 +1,7 @@
 <div align="center">
 <h2>Xlpanel - A client for pterodactyl.</h2>
-<img src="https://img.shields.io/badge/Version-0.1-0040ff.svg"></img>
-<img src="https://img.shields.io/badge/Codename-Blyat-0000aa.svg"></img>
+<img src="https://img.shields.io/badge/Version-0.2-0040ff.svg"></img>
+<img src="https://img.shields.io/badge/Codename-sinii_khleb-0000aa.svg"></img>
 <img src="https://i.imgur.com/MWZZ9qJ.png"></ing>
 </div>
 
