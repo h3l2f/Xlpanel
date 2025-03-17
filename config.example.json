@@ -1,7 +1,7 @@
 {
     "name": "Xlpanel",
-    "version": "0.0.1",
-    "codename": "blyat",
+    "version": "0.2",
+    "codename": "sinii khleb",
     "pterodactyl": {
         "host": "your_pterodactyl_host",
         "key": "your_pterodactyl_api_key"

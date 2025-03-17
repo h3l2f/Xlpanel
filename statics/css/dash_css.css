@@ -58,6 +58,7 @@ body {
 .nav .items a .it {
     padding: 10px;
     margin: 5px;
+    color: white;
     border-radius: 10px;
     transition: 0.2s;
     border: dashed 1px transparent;
