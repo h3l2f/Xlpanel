@@ -23,7 +23,7 @@ function del() {
                 alert("Deleted.")
                 window.location.href = "/servers"
             } else {
-                alert("Something went wrong.")
+                alert(r.message)
                 console.log(r.message)
                 $(".loading").fadeOut()
             }

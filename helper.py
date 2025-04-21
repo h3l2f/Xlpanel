@@ -208,8 +208,8 @@ def listPteroServer(name):
         if i["attributes"]["user"] == uid:
             uDt.append(i["attributes"])
             tCPU += i["attributes"]["limits"]["cpu"]
-            tRam += i["attributes"]["limits"]["memory"]/1024
-            tDisk+= i["attributes"]["limits"]["disk"]/1024
+            tRam += i["attributes"]["limits"]["memory"]
+            tDisk+= i["attributes"]["limits"]["disk"]
     return (True, uDt, tCPU, tDisk, tRam)
 
 def createPteroServer(name, user, node, egg, cpu, ram, disk):
@@ -234,6 +234,8 @@ def createPteroServer(name, user, node, egg, cpu, ram, disk):
     udisk = uDt[1]["disk"]-uSv[3] #pyright: ignore
     uram = uDt[1]["ram"]-uSv[4] #pyright: ignore
 
+    print(ucpu, udisk, uram)
+
     if (ucpu < cpu):
         return (False, "Not enough cpu.")
     elif (udisk < disk):
@@ -250,9 +252,9 @@ def createPteroServer(name, user, node, egg, cpu, ram, disk):
             "default": getPteroAllocation(node)[1]["id"] #pyright:ignore
         }
     data["limits"] = {
-            "memory": ram*1024,
+            "memory": ram,
             "swap": 0,
-            "disk": disk*1024,
+            "disk": disk,
             "io": 500,
             "cpu": cpu
         }

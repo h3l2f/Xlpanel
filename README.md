@@ -5,9 +5,14 @@
 <img src="https://i.imgur.com/MWZZ9qJ.png"></ing>
 </div>
 
-# Update: ver 0.2 (sinii khleb)
+# Update: v0.2 (sinii khleb)
 ![v0.2](https://i.imgur.com/bwRUsJu.png)
 > Now you can personalize your client with any color you want.
+
+# Change logs: v0.2.1
+- Fixed css
+- Change unit from GB to MB
+- Added anti delete on suspended server
 
 # Key features
 * Manage your pterodactyl server

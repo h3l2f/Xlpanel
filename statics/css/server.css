@@ -30,6 +30,7 @@ main .title button:active {
 }
 
 main .sv {
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -38,25 +39,49 @@ main .sv {
 
 main .sv a {
     color: white;
-    margin-top: 20px;
+    width: 100%;
 }
 
-main .sv a .sio {
+main .sv .sio {
     padding: 15px;
     border: dashed 2px #0000aa;
     border-radius: 16px;
     width: 100%;
-    min-width: 170px;
+    min-width: 250px;
     max-width: 300px;
 }
 
-main .sv a .sio * {
+main .sv .sio * {
     font-weight: 100;
 }
 
-main .sv a .sio .info {
+main .sv .sio .info {
     display: flex;
     justify-content: space-between;
+}
+
+main .sv .sio .btn {
+    display: flex;
+    gap: 5px;
+}
+
+main .sv .sio .btn button {
+    width: 100%;
+    background-color: transparent;
+    border: dashed 1px #0000aa;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+main .sv .sio .btn button:hover {
+    border-style: solid;
+}
+
+main .sv .sio .btn button:active {
+    background-color: #0000aa;
 }
 
 .crSp {

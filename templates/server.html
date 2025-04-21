@@ -74,13 +74,13 @@
                 </div>
                 <div class="ann">
                     <div class="inp">
-                        <input type="number" min="1" max="9999" maxlength="4" minlength="1" name="cpu" placeholder="CPU (%)" autocomplete="off" required>
+                        <input type="number" min="1" max="99999" maxlength="5" minlength="1" name="cpu" placeholder="CPU (%)" autocomplete="off" required>
                     </div>
                     <div class="inp">
-                        <input type="number" min="1" max="9999" maxlength="4" minlength="1" name="ram" placeholder="Ram (GB)" autocomplete="off" required>
+                        <input type="number" min="1" max="99999" maxlength="5" minlength="1" name="ram" placeholder="Ram (MB)" autocomplete="off" required>
                     </div>
                     <div class="inp">
-                        <input type="number" min="1" max="9999" maxlength="4" minlength="1" name="disk" placeholder="Disk (GB)" autocomplete="off" required>
+                        <input type="number" min="1" max="99999" maxlength="5" minlength="1" name="disk" placeholder="Disk (MB)" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="inp">
@@ -135,16 +135,19 @@
             {% endif %}
             <div class="sv">
                 {% for i in sv %}
-                <a href="/server/{{i['identifier']}}">
                     <div class="sio">
                         <h2 style="overflow-x: hidden;
                                    text-overflow: ellipsis;">{{i["name"]}}</h2>
                         <h6>{{i['identifier']}}</h6>
                         <div class="info" style="margin-top: 5px"><h4>CPU:</h4><h4>{{i["limits"]["cpu"]}}%</h4></div>
-                        <div class="info" style="margin-top: 5px"><h4>Ram:</h4><h4>{{i["limits"]["memory"]/1024}}GB</h4></div>
-                        <div class="info" style="margin-top: 5px"><h4>Disk:</h4><h4>{{i["limits"]["disk"]/1024}}GB</h4></div>
+                        <div class="info" style="margin-top: 5px"><h4>Ram:</h4><h4>{{i["limits"]["memory"]}}MB</h4></div>
+                        <div class="info" style="margin-top: 5px"><h4>Disk:</h4><h4>{{i["limits"]["disk"]}}MB</h4></div>
+                        <div class="info" style="margin-top: 5px"><h4>Status:</h4><h4>{{i.get("status") if i.get("status") else "active"}}</h4></div>
+                        <div class="btn">
+                            <a href="/panel/{{i['identifier']}}"><button>Panel</button></a>
+                            <a href="/server/{{i['identifier']}}"><button>Manage</button></a>
+                        </div>
                     </div>
-                </a>
                 {% endfor %}
             </div>
         </main>
@@ -178,7 +181,8 @@
         .nav .items a:hover .it,
         main .title button,
         main .title button:active,
-        main .sv a .sio,
+        main .sv .sio,
+        main .sv .sio .btn button,
         .crSp .form,
         .crSp .form form .inp input:focus,
         .crSp .form form .btn input {
@@ -201,7 +205,8 @@
             background-color: {{bcolor}}bb;
         }
 
-        .nav .items a:active .it {
+        .nav .items a:active .it,
+        main .sv .sio .btn button:active {
             background-color: {{pcolor}};
         }
 

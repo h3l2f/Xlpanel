@@ -1,6 +1,6 @@
 {
     "name": "Xlpanel",
-    "version": "0.2",
+    "version": "0.2.1",
     "codename": "sinii khleb",
     "pterodactyl": {
         "host": "your_pterodactyl_host",
@@ -27,8 +27,8 @@
     "db_comment": "Only support sqlite, please provide a file name, not link!",
     "default": {
         "cpu": 300,
-        "ram": 2,
-        "disk": 5,
+        "ram": 2048,
+        "disk": 5120,
         "slot": 1,
         "coin": 0
     },
@@ -91,6 +91,7 @@
             "name": "lorem1"
         }
     },
+    "location_comment": "\"<nodeID>\": {\"name\": '<name>'}",
     "afk": {
         "enable": true,
         "coinPerStage": 10,
@@ -99,8 +100,8 @@
     "store": {
         "enable": true,
         "cpu": [100, 100],
-        "disk": [200, 1],
-        "ram": [250, 1],
+        "disk": [200, 1024],
+        "ram": [250, 1024],
         "slot": [1500, 1],
         "_comment": "[price, amount(int)]"
     },

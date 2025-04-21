@@ -78,8 +78,9 @@
                                 text-overflow: ellipsis;">{{i["name"]}}</h2>
                     <h6 style="margin-bottom: 20px">{{i['identifier']}}</h6>
                     <div class="info" style="margin-top: 5px"><h4>CPU:</h4><h4>{{i["limits"]["cpu"]}}%</h4></div>
-                    <div class="info" style="margin-top: 5px"><h4>Ram:</h4><h4>{{i["limits"]["memory"]/1024}}GB</h4></div>
-                    <div class="info" style="margin-top: 5px"><h4>Disk:</h4><h4>{{i["limits"]["disk"]/1024}}GB</h4></div>
+                    <div class="info" style="margin-top: 5px"><h4>Ram:</h4><h4>{{i["limits"]["memory"]}}MB</h4></div>
+                    <div class="info" style="margin-top: 5px"><h4>Disk:</h4><h4>{{i["limits"]["disk"]}}MB</h4></div>
+                    <div class="info" style="margin-top: 5px"><h4>Status:</h4><h4>{{i.get("status") if i.get("status") else "active"}}</h4></div>
                     <button onclick="del()">Delete</button>
                 </div>
             </div>

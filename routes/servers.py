@@ -74,6 +74,8 @@ def _sv(identity: str):
     elif request.method == "DELETE":
         for i in uSv[1]:
             if i["identifier"] == identity:
+                if i["status"] == "suspended":
+                    return jsonify({"status": "error", "message": "This server has been suspended."})
                 e = helper.delPteroServer(i["id"])
                 if (e[0]):
                     return jsonify({"status": "ok"})

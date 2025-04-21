@@ -46,3 +46,7 @@ main .info .item .i {
     text-align: center;
     word-break: break-all;
 }
+
+main .info .item .i h4 {
+    display: inline-block;
+}
