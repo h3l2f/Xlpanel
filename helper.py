@@ -118,12 +118,14 @@ def register(user, passwd, email, cpu, ram, disk, slot, coin):
     passwd = ende.encode(passwd)
     cursor.execute("select * from user where email=?", (email,))
     result = cursor.fetchall()
+    e = int(not config["mail"]["verifyUser"])
     if len(result) != 0:
         return (False, "Email has been used.")
     try:
-        cursor.execute("insert into user (user, password, email, cpu, ram, disk, slot, coin, verified) values (?, ?, ?, ?, ?, ?, ?, ?, 0)", (user, passwd, email, cpu, ram, disk, slot, coin))
+        cursor.execute("insert into user (user, password, email, cpu, ram, disk, slot, coin, verified) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", (user, passwd, email, cpu, ram, disk, slot, coin, e))
     except Exception:
         return (False, "Username has been used.")
+    if not config["mail"]["verifyUser"]: createPteroUser(user, email)
     conn.commit()
     conn.close()
     return (True,)
@@ -233,8 +235,6 @@ def createPteroServer(name, user, node, egg, cpu, ram, disk):
     ucpu = uDt[1]["cpu"]-uSv[2] #pyright: ignore
     udisk = uDt[1]["disk"]-uSv[3] #pyright: ignore
     uram = uDt[1]["ram"]-uSv[4] #pyright: ignore
-
-    print(ucpu, udisk, uram)
 
     if (ucpu < cpu):
         return (False, "Not enough cpu.")

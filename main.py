@@ -79,6 +79,8 @@ if not afk["enable"]:
 if not store["enable"]:
     routeFile.remove("store.py")
     menuItems.pop("Store")
+if not config["mail"]["verifyUser"]:
+    routeFile.remove("verify.py")
 for i in routeFile:
     if "__" in i: continue
     exec(f"import routes.{i.split('.')[0]}")

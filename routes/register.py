@@ -16,7 +16,7 @@ def register():
         cpasswd = request.form.get("cpasswd")
         email = request.form.get("email")
         
-        if not helper.chMX(email.split("@")[::-1][0]):
+        if (not helper.chMX(email.split("@")[::-1][0])) and (config["mail"]["verifyUser"]):
             return render_template(
                 "register.html",
                 name=name,

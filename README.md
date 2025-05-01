@@ -1,6 +1,6 @@
 <div align="center">
 <h2>Xlpanel - A client for pterodactyl.</h2>
-<img src="https://img.shields.io/badge/Version-0.2-0040ff.svg"></img>
+<img src="https://img.shields.io/badge/Version-0.2.2-0040ff.svg"></img>
 <img src="https://img.shields.io/badge/Codename-sinii_khleb-0000aa.svg"></img>
 <img src="https://i.imgur.com/MWZZ9qJ.png"></ing>
 </div>
@@ -9,10 +9,8 @@
 ![v0.2](https://i.imgur.com/bwRUsJu.png)
 > Now you can personalize your client with any color you want.
 
-# Change logs: v0.2.1
-- Fixed css
-- Change unit from GB to MB
-- Added anti delete on suspended server
+# Change logs: v0.2.2
+- Now you can choose between verify user or not.
 
 # Key features
 * Manage your pterodactyl server

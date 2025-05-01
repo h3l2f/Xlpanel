@@ -1,6 +1,6 @@
 {
     "name": "Xlpanel",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "codename": "sinii khleb",
     "pterodactyl": {
         "host": "your_pterodactyl_host",
@@ -21,6 +21,7 @@
             "from": "Xlpanel <h3l2f@h3l2f.site>",
             "_fromComment": "Use name<email> to set the sender name."
         },
+        "verifyUser": false,
         "_smtpComment": "required!"
     },
     "database": "xlpanel.db",
