@@ -16,11 +16,11 @@ function sh() {
         "padding-bottom": ($(".nav .items").css("padding-bottom")=="30px"?"0":"30px")
     })
     $(".nav .items .it").css("text-align", ($(".nav .items .it").css("text-align")=="center"?"left":"center"))
-    if ($(".nav").css("width")!="55px") {
+    if ($(".nav").css("width")!="65px") {
         $_he();
-        $(".nav").css("width",($(".nav").css("width")=="55px"?"100%":"55px"))
+        $(".nav").css("width",($(".nav").css("width")=="65px"?"100%":"55px"))
     } else {
-        $(".nav").css("width",($(".nav").css("width")=="55px"?"100%":"55px"))
+        $(".nav").css("width",($(".nav").css("width")=="65px"?"100%":"55px"))
         $_he_1()
     }
 }

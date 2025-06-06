@@ -1,0 +1,261 @@
+main {
+  padding: 20px;
+  opacity: 0;
+}
+
+main .title * {
+  font-weight: 100;
+  user-select: none;
+}
+
+main .title button {
+  float: right;
+  border: none;
+  width: 100px;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.5);
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+main .title button:hover {
+  border-color: #0000aa;
+}
+
+main .title button:active {
+  background-color: #0000aa;
+}
+
+main .sv {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  user-select: none;
+}
+
+main .sv a {
+  width: 100%;
+}
+
+main .sv .sio {
+  padding: 15px;
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+  width: 100%;
+  min-width: 250px;
+  max-width: 300px;
+}
+
+main .sv .sio * {
+  font-weight: 100;
+}
+
+main .sv .sio .info {
+  display: flex;
+  justify-content: space-between;
+}
+
+main .sv .sio .btn {
+  display: flex;
+  gap: 5px;
+}
+
+main .sv .sio .btn button {
+  width: 100%;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.5);
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 5px;
+  transition: 0.3s;
+}
+
+main .sv .sio .btn button:hover {
+  border-color: #0000aa;
+}
+
+main .sv .sio .btn button:active {
+  background-color: #0000aa;
+}
+
+.crSp {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 9;
+  background-color: rgba(0, 0, 16, 0.8);
+  backdrop-filter: blur(5px);
+  padding: 10px;
+  user-select: none;
+}
+
+.crSp .form {
+  width: 100%;
+  max-width: 500px;
+  height: fit-content;
+  min-height: 200px;
+  max-height: 400px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  background: rgba(0, 0, 170, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.3);
+  padding: 10px;
+}
+
+.crSp .form form .inp {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.crSp .form form .inp input {
+  width: 100%;
+  font-size: 16px;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 7px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.45);
+}
+
+.crSp .form form .inp input:focus {
+  border-color: #0000aa;
+  outline: none;
+}
+
+.crSp .form form .inp select {
+  width: 100%;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 7px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.45);
+  font-size: 16px;
+}
+
+.crSp .form form .inp select:focus {
+  border-color: #0000aa;
+  outline: none;
+}
+
+.crSp .form form .inp select * {
+  background-color: #0000dd;
+}
+
+.crSp .form form .ann {
+  display: flex;
+  gap: 10px;
+}
+
+.crSp .form form .btn {
+  width: 100%;
+  margin: auto;
+}
+
+.crSp .form form .btn input {
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.5);
+  cursor: pointer;
+  width: 100%;
+}
+
+.crSp .form form .btn input:hover {
+  border-color: #0000aa;
+}
+
+.crSp .form form .btn input:active {
+  background-color: #0000aa;
+}
+
+main :where(.err, .done) {
+  user-select: none;
+  margin-top: 20px;
+  padding: 20px;
+  color: white;
+  background: rgba(170, 0, 0, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(170, 0, 0, 0.3);
+}
+
+main :where(.err, .done) * {
+  font-weight: 100;
+}
+
+main .done {
+  color: white;
+  background: rgba(0, 170, 0, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 170, 0, 0.3);
+}
+
+/* iserver.html */
+main .isv {
+  margin: 20px auto;
+  user-select: none;
+  width: 100%;
+  max-width: 1000px;
+}
+
+main .isv .sio {
+  padding: 15px;
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+  width: 100%;
+}
+
+main .isv .sio * {
+  font-weight: 100;
+}
+
+main .isv .sio .info {
+  display: flex;
+  justify-content: space-between;
+}
+
+main .isv .sio button {
+  width: 100%;
+  margin-top: 20px;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(170, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+main .isv .sio button:hover {
+  border-color: #aa0000;
+}
+
+main .isv .sio button:active {
+  background-color: #aa0000;
+}

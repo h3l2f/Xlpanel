@@ -6,11 +6,14 @@ import helper
 import datetime
 import sendmail
 
-app = Flask(__name__, template_folder="templates", static_folder="statics")
+app = Flask(__name__, template_folder="templates", static_folder="assets")
 sock = Sock(app)
 app.jinja_env.globals.update(list=list)
 app.jinja_env.globals.update(datetime=datetime)
 app.jinja_env.globals.update(request=request)
+app.jinja_env.globals.update(min=min)
+app.jinja_env.globals.update(max=max)
+app.jinja_env.globals.update(int=int)
 
 app.config['SOCK_SERVER_OPTIONS'] = {'ping_interval': 2}
 
@@ -21,9 +24,6 @@ with open("config.json","r", encoding="utf-8") as f:
 name = config["name"]
 ver = config["version"]
 codename = config["codename"]
-pcolor = config["color"]["primary"]
-bcolor = config["color"]["background"]
-tcolor = config["color"]["text"]
 
 # flask
 host = config["flask"]["host"]

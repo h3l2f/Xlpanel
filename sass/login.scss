@@ -1,0 +1,104 @@
+@import "data";
+
+main {
+    display: flex;
+    position: relative;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    justify-content: center;
+    height: 100%;
+    padding: 50px;
+    max-width: 1500px;
+    max-height: 750px;
+    user-select: none;
+}
+
+.main {
+    width: 100%;
+
+    /* padding: 10px; */
+    display: inline-block;
+}
+
+.img {
+    width: 100%;
+
+    /* padding: 10px; */
+    display: inline-block;
+    background-image: url(/assets/img/login-bg.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 16px;
+}
+
+.main *,
+.img * {
+    max-width: 100%;
+}
+
+.main .form {
+    height: fit-content;
+
+    /* width: fit-content; */
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    .inp {
+        margin: auto;
+        margin-top: 10px;
+        width: 100%;
+        max-width: 300px;
+
+        input {
+            @include input($pcolor);
+            width: 100%;
+        }
+    }
+
+    .passwd {
+        display: flex;
+
+        button {
+            padding: 0 5px;
+            margin-left: 5px;
+            border-radius: 10px;
+            @include button($pcolor);
+        }
+    }
+
+    .submit {
+        width: 100%;
+        max-width: 300px;
+        margin: auto;
+        margin-top: 10px;
+
+        input {
+            width: 100%;
+            @include button($pcolor);
+            background-color: darken($pcolor, 20%);
+            margin-bottom: 5px;
+        }
+    }
+
+    .error {
+        padding: 5px;
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+        margin: auto;
+        border: solid 1px #aa0000;
+        border-radius: 10px;
+        color: #cc0000;
+        margin-top: 10px;
+        word-break: break-all;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .img {
+        display: none;
+    }
+}

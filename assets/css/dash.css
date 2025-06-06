@@ -1,0 +1,61 @@
+main {
+  opacity: 0;
+  user-select: none;
+}
+
+main .welcome,
+main .helper {
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+  padding: 15px;
+  margin: 15px;
+}
+
+main :where(.welcome, .helper) * {
+  font-weight: 100;
+}
+
+main .info {
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+}
+
+main .info .item {
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+main .info .item .name {
+  font-size: 15px;
+}
+
+main .info .item .i {
+  height: 3px;
+  background-color: #000084;
+}
+
+main .info .item .i .f {
+  width: 0%;
+  height: 100%;
+  background-color: #0000c4;
+}

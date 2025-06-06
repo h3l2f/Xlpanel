@@ -1,0 +1,82 @@
+@import "data";
+
+main {
+	padding: 20px;
+	opacity: 0;
+
+	.title * {
+		font-weight: 100;
+		user-select: none;
+	}
+
+	.info {
+		user-select: none;
+		padding: 16px;
+		margin: 20px auto;
+		width: 100%;
+		max-width: 750px;
+		@include glass(transparentize($pcolor, 0.1));
+
+		.r {
+			margin-bottom: 10px;
+
+			* {
+				font-weight: 100;
+			}
+		}
+
+		.cpass {
+			padding: 20px;
+			@include glass(transparentize($pcolor, 0.1));
+
+			form {
+				.inp {
+					display: flex;
+					width: 100%;
+					margin-top: 10px;
+
+					input {
+						width: 100%;
+						@include input($pcolor);
+					}
+
+					button {
+						padding: 0 5px;
+						margin-left: 5px;
+						border-radius: 10px;
+						cursor: pointer;
+						@include button($pcolor);
+					}
+				}
+
+				.submit {
+					width: 100%;
+					max-width: 300px;
+					margin: auto;
+					margin-top: 10px;
+
+					input {
+						@include button($pcolor);
+						width: 100%;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+
+	:where(.err, .done) {
+		user-select: none;
+		margin-top: 20px;
+		padding: 20px;
+		@include glass(#aa0000);
+
+		* {
+			font-weight: 100;
+		}
+	}
+
+	.done {
+		@include glass(#00aa00);
+	}
+}

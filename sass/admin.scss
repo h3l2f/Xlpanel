@@ -1,0 +1,84 @@
+@import "data";
+
+main {
+    padding: 20px;
+    opacity: 0;
+
+    .title {
+        user-select: none;
+        height: fit-content;
+        padding: 20px;
+        margin-bottom: 20px;
+        @include glass(transparentize($pcolor, 0.1));
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap-reverse;
+        gap: 20px;
+
+        .img {
+            height: 100%;
+        }
+
+        img {
+            border: solid 1px $pcolor;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 150px;
+        }
+
+        .info {
+            height: fit-content;
+        }
+    }
+
+    .title1 * {
+        font-weight: 100;
+        user-select: none;
+    }
+
+    :where(.err, .done) {
+        user-select: none;
+        margin-top: 20px;
+        padding: 20px;
+        @include glass(#aa0000);
+
+        * {
+            font-weight: 100;
+        }
+    }
+
+    .done {
+        @include glass(#00aa00);
+    }
+
+    .form {
+        user-select: none;
+        padding: 16px;
+        margin-top: 20px;
+        @include glass(transparentize($pcolor, 0.1));
+
+        .e {
+            .inp {
+                width: 100%;
+                max-width: 100px;
+
+                input {
+                    width: 100%;
+                    @include input($pcolor);
+                }
+            }
+
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 16px;
+            gap: 16px;
+            justify-content: space-between;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 16px;
+            @include button($pcolor);
+        }
+    }
+}

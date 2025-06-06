@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/statics/css/general.css">
-    <link rel="stylesheet" href="/statics/css/dash_css.css">
-    <link rel="stylesheet" href="/statics/css/store.css">
-    <link rel="shortcut icon" href="/statics/img/logo.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/general.css">
+    <link rel="stylesheet" href="/assets/css/dash_css.css">
+    <link rel="stylesheet" href="/assets/css/store.css">
+    <link rel="shortcut icon" href="/assets/img/logo.png" type="image/png">
     <script>
         document.onreadystatechange = function() {
             if (document.readyState == 'complete') {
@@ -20,8 +20,8 @@
             }
         };
     </script>
-    <script src="/statics/js/store.js"></script>
-    <script src="/statics/js/dash.js"></script>
+    <script src="/assets/js/store.js"></script>
+    <script src="/assets/js/dash.js"></script>
     <title>Store - {{name}}</title>
 </head>
 <body>
@@ -136,65 +136,5 @@
         <input type="text" name="item" id="sbi">
         <input type="text" name="amount" id="sba">
     </form>
-
-    <!-- v0.2 -->
-    <style>
-        body {
-            background-color: {{bcolor}};
-        }
-
-        .nav {
-            background-color: {{pcolor}}0a;
-            border-right-color: {{pcolor}};
-        }
-
-        * {
-            color: {{tcolor}} !important;
-        }
-
-        .nav .items a:hover .it,
-        main .items .it,
-        main .items .it select:focus,
-        main .items .it button  {
-            border-color: {{pcolor}};
-        }
-
-        main .items .it select{
-            border-color: {{pcolor}}20;
-        }
-
-        .nav .items a:active .it,
-        main .items .it select *,
-        main .items .it button:active {
-            background-color: {{pcolor}};
-        }
-
-        .nav .users {
-            background-color: {{pcolor}}30;
-        }
-
-        .nav #menuToggle {
-            background-color: {{pcolor}}20;
-        }
-
-        .nav .items .sp .it {
-            background-color: {{pcolor}} !important;
-        }
-
-        .main footer {
-            background-color: {{pcolor}}07;
-            border-color: {{pcolor}};
-        }
-        
-        .loading {
-            background-color: {{bcolor}}cc;
-        }
-
-        .loader,
-        .loader:before,
-        .loader:after {
-            --c:no-repeat linear-gradient({{pcolor}} 0 0);
-        }
-    </style>
 </body>
 </html>

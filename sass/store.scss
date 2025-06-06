@@ -1,0 +1,57 @@
+@import "data";
+
+main {
+    padding: 20px;
+    opacity: 0;
+
+    .title * {
+        font-weight: 100;
+        user-select: none;
+    }
+
+    .items {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .it {
+            padding: 20px;
+            margin-top: 20px;
+            @include glass(transparentize($pcolor, 0.1));
+            width: 100%;
+            max-width: 200px;
+
+            select {
+                width: 100%;
+                margin-top: 10px;
+                @include input($pcolor);
+
+                * {
+                    background-color: lighten($pcolor, 10%);
+                }
+            }
+
+            button {
+                width: 100%;
+                margin-top: 10px;
+                @include button($pcolor);
+            }
+        }
+    }
+
+    :where(.err, .done) {
+        user-select: none;
+        margin-top: 20px;
+        padding: 20px;
+        @include glass(#aa0000);
+
+        * {
+            font-weight: 100;
+        }
+    }
+
+    .done {
+        @include glass(#00aa00);
+    }
+}

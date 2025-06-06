@@ -1,16 +1,15 @@
 <div align="center">
 <h2>Xlpanel - A client for pterodactyl.</h2>
-<img src="https://img.shields.io/badge/Version-0.2.2-0040ff.svg"></img>
-<img src="https://img.shields.io/badge/Codename-sinii_khleb-0000aa.svg"></img>
-<img src="https://i.imgur.com/MWZZ9qJ.png"></ing>
+<img src="https://img.shields.io/badge/Version-1.0-0040ff.svg"></img>
+<img src="https://img.shields.io/badge/Codename-novaya_veshsh-0000aa.svg"></img>
 </div>
 
-# Update: v0.2 (sinii khleb)
-![v0.2](https://i.imgur.com/bwRUsJu.png)
-> Now you can personalize your client with any color you want.
+# Update: v1.0 (novaya veshsh)
+> Just renew everything!
 
-# Change logs: v0.2.2
-- Now you can choose between verify user or not.
+# Change logs: v1.0
+- New UI
+- New Experience
 
 # Key features
 * Manage your pterodactyl server
@@ -73,10 +72,8 @@ sudo ln -s /etc/nginx/sites-available/<name_you_want>.conf /etc/nginx/sites-enab
 
 </details>
 
-- Clone this project:
-```bash
-git clone https://github.com/h3l2f/xlpanel
-```
+- Download the latest version
+- Extract the .zip file
 - Go to the project folder
 ```bash
 cd xlpanel
@@ -96,7 +93,20 @@ python main.py
 ```
 > Done. Now your server is online!
 
-- To change the icon, please upload your icon into `statics/img` folder and replace the `logo.png` with your new icon.
+- To change the icon, please upload your icon into `assets/img` folder and replace the `logo.png` with your new icon.
+
+<details>
+
+<summary>How to change the theme?</summary>
+
+- Edit the `sass/_data.scss` file
+- You can change:
+    + primary color: `$pcolor`
+    + background color: `$bgcolor`
+    + text color: `$text-color`
+- After that, run the `bprj.py` to compile all the sass file into css.
+
+</details>
 
 # Pterodactyl theme
 <img src="https://i.imgur.com/PL3CRTX.png"></ing>

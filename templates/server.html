@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/statics/css/general.css">
-    <link rel="stylesheet" href="/statics/css/dash_css.css">
-    <link rel="stylesheet" href="/statics/css/server.css">
-    <link rel="shortcut icon" href="/statics/img/logo.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/general.css">
+    <link rel="stylesheet" href="/assets/css/dash_css.css">
+    <link rel="stylesheet" href="/assets/css/server.css">
+    <link rel="shortcut icon" href="/assets/img/logo.png" type="image/png">
     <script>
         document.onreadystatechange = function() {
             if (document.readyState == 'complete') {
@@ -20,8 +20,8 @@
             }
         };
     </script>
-    <script src="/statics/js/server.js"></script>
-    <script src="/statics/js/dash.js"></script>
+    <script src="/assets/js/server.js"></script>
+    <script src="/assets/js/dash.js"></script>
     <title>Your servers - {{name}}</title>
 </head>
 <body>
@@ -64,7 +64,7 @@
                 <div class="loader"></div>
             </div>
             <h2 style="margin-bottom: 10px; float: right; font-weight: 100;">
-            <a style="color: #aa0000" href="javascript: $('.crSp').fadeToggle(100);">
+            <a style="color: #aa0000 !important; cursor: pointer" onclick="$('.crSp').fadeToggle(100)">
                 <i class="fa-solid fa-xmark"></i>
             </a></h2>
             <h2 style="margin-bottom: 10px; font-weight: 100;">Create</h2>
@@ -161,81 +161,5 @@
             </div>
         </footer>
     </div>
-
-    <!-- v0.2 -->
-    <style>
-        body {
-            background-color: {{bcolor}};
-        }
-        
-        * {
-            color: {{tcolor}} !important;
-        }
-
-
-        .nav {
-            background-color: {{pcolor}}0a;
-            border-right-color: {{pcolor}};
-        }
-
-        .nav .items a:hover .it,
-        main .title button,
-        main .title button:active,
-        main .sv .sio,
-        main .sv .sio .btn button,
-        .crSp .form,
-        .crSp .form form .inp input:focus,
-        .crSp .form form .btn input {
-            border-color: {{pcolor}};
-        }
-
-        .crSp .form form .inp input,
-        .crSp .form form .inp select,
-        .crSp .form form .inp select:focus {
-            border-color: {{pcolor}}20;
-        }
-
-        .crSp .form form .inp select *,
-        .crSp .form form .btn input:active,
-        main .title button:active {
-            background-color: {{pcolor}};
-        }
-
-        .crSp {
-            background-color: {{bcolor}}bb;
-        }
-
-        .nav .items a:active .it,
-        main .sv .sio .btn button:active {
-            background-color: {{pcolor}};
-        }
-
-        .nav .users {
-            background-color: {{pcolor}}30;
-        }
-
-        .nav #menuToggle {
-            background-color: {{pcolor}}20;
-        }
-
-        .nav .items .sp .it {
-            background-color: {{pcolor}} !important;
-        }
-
-        .main footer {
-            background-color: {{pcolor}}07;
-            border-color: {{pcolor}};
-        }
-        
-        .loading {
-            background-color: {{bcolor}}cc;
-        }
-
-        .loader,
-        .loader:before,
-        .loader:after {
-            --c:no-repeat linear-gradient({{pcolor}} 0 0);
-        }
-    </style>
 </body>
 </html>

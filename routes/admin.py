@@ -28,13 +28,13 @@ def ad():
                 error=request.args.get("err"),
                 version=ver,
                 codename=codename,
-                pcolor = pcolor,
-                bcolor = bcolor,
-                tcolor = tcolor,
+                
+                
+                
                 loadTime=int((time.time()-beginT)*100000)/100000
             )
         else:
-            return render_template("HTTPerror.html", errorCode=404, pcolor = pcolor, errorName="Not Found")
+            return render_template("HTTPerror.html", errorCode=404,  errorName="Not Found")
 
 @app.route("/admin/add/", methods=["GET"])
 def adr():
@@ -86,4 +86,4 @@ def adr():
             conn.close()
             return redirect("/admin?err=none")
         else:
-            return render_template("HTTPerror.html", errorCode=404, pcolor = pcolor, bcolor = bcolor, errorName="Not Found")
+            return render_template("HTTPerror.html", errorCode=404,   errorName="Not Found")

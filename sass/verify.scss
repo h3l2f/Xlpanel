@@ -1,0 +1,45 @@
+@import "data";
+
+body {
+    padding: 10px;
+}
+
+main {
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 16px;
+    text-align: center;
+    user-select: none;
+    @include glass(transparentize($pcolor, 0.1));
+
+    input {
+        padding: 0 10px 5px 10px;
+        width: 100%;
+        max-width: 130px;
+        margin-top: 16px;
+        text-align: center;
+        font-size: 30px;
+        @include input($pcolor);
+        
+        &:disabled {
+            border-color: transparent;
+        }
+    }
+
+    button {
+        margin-top: 16px;
+        width: 100%;
+        max-width: 100px;
+        @include button($pcolor);
+
+        &:disabled {
+            background-color: transparentize($pcolor, 0.8);
+            border-color: transparent;
+            color: #ffffff40;
+        }
+    }
+}

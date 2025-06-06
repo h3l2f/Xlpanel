@@ -1,0 +1,122 @@
+main {
+  padding: 20px;
+  opacity: 0;
+}
+
+main .title {
+  user-select: none;
+  height: fit-content;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+  gap: 20px;
+}
+
+main .title .img {
+  height: 100%;
+}
+
+main .title img {
+  border: solid 1px #0000aa;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 150px;
+}
+
+main .title .info {
+  height: fit-content;
+}
+
+main .title1 * {
+  font-weight: 100;
+  user-select: none;
+}
+
+main :where(.err, .done) {
+  user-select: none;
+  margin-top: 20px;
+  padding: 20px;
+  color: white;
+  background: rgba(170, 0, 0, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(170, 0, 0, 0.3);
+}
+
+main :where(.err, .done) * {
+  font-weight: 100;
+}
+
+main .done {
+  color: white;
+  background: rgba(0, 170, 0, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 170, 0, 0.3);
+}
+
+main .form {
+  user-select: none;
+  padding: 16px;
+  margin-top: 20px;
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+}
+
+main .form .e {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+main .form .e .inp {
+  width: 100%;
+  max-width: 100px;
+}
+
+main .form .e .inp input {
+  width: 100%;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 7px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.45);
+}
+
+main .form .e .inp input:focus {
+  border-color: #0000aa;
+  outline: none;
+}
+
+main .form button {
+  width: 100%;
+  margin-top: 16px;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.5);
+  cursor: pointer;
+}
+
+main .form button:hover {
+  border-color: #0000aa;
+}
+
+main .form button:active {
+  background-color: #0000aa;
+}

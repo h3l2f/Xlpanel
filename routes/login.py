@@ -9,7 +9,7 @@ def login():
         check = helper.chSID(request.cookies.get("sid"))
         if (check[0]):
             return redirect("/dashboard")
-        return render_template("login.html", tcolor = tcolor, pcolor = pcolor, bcolor = bcolor, name=name)
+        return render_template("login.html",    name=name)
     else:
         user = request.form.get("user")
         passwd = request.form.get("passwd")
@@ -21,4 +21,4 @@ def login():
         else:
             if check[1] == "verify":
                 return redirect(f"/verify?user={check[2]}")
-            return render_template("login.html", tcolor = tcolor, name=name, pcolor = pcolor, bcolor = bcolor, error=check[1])
+            return render_template("login.html",  name=name,   error=check[1])

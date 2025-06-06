@@ -1,0 +1,132 @@
+main {
+  padding: 20px;
+  opacity: 0;
+}
+
+main .title * {
+  font-weight: 100;
+  user-select: none;
+}
+
+main .info {
+  user-select: none;
+  padding: 16px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 750px;
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+}
+
+main .info .r {
+  margin-bottom: 10px;
+}
+
+main .info .r * {
+  font-weight: 100;
+}
+
+main .info .cpass {
+  padding: 20px;
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+}
+
+main .info .cpass form .inp {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+}
+
+main .info .cpass form .inp input {
+  width: 100%;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 7px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.45);
+}
+
+main .info .cpass form .inp input:focus {
+  border-color: #0000aa;
+  outline: none;
+}
+
+main .info .cpass form .inp button {
+  padding: 0 5px;
+  margin-left: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.5);
+  cursor: pointer;
+}
+
+main .info .cpass form .inp button:hover {
+  border-color: #0000aa;
+}
+
+main .info .cpass form .inp button:active {
+  background-color: #0000aa;
+}
+
+main .info .cpass form .submit {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+main .info .cpass form .submit input {
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.5);
+  cursor: pointer;
+  width: 100%;
+  cursor: pointer;
+}
+
+main .info .cpass form .submit input:hover {
+  border-color: #0000aa;
+}
+
+main .info .cpass form .submit input:active {
+  background-color: #0000aa;
+}
+
+main :where(.err, .done) {
+  user-select: none;
+  margin-top: 20px;
+  padding: 20px;
+  color: white;
+  background: rgba(170, 0, 0, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(170, 0, 0, 0.3);
+}
+
+main :where(.err, .done) * {
+  font-weight: 100;
+}
+
+main .done {
+  color: white;
+  background: rgba(0, 170, 0, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 170, 0, 0.3);
+}

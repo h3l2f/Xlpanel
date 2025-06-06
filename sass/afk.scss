@@ -1,0 +1,35 @@
+@import "data";
+
+main {
+    padding: 20px;
+    opacity: 0;
+
+    .title * {
+        font-weight: 100;
+        user-select: none;
+    }
+
+    .info {
+        width: 100%;
+        max-width: 1000px;
+        padding: 20px;
+        margin: 20px auto;
+        @include glass(transparentize($pcolor, 0.1));
+        user-select: none;
+
+        .bar {
+            width: 100%;
+            height: 3px;
+            background-color: transparentize($pcolor, 0.6);
+            margin: 10px 0;
+            overflow: hidden;
+
+            .chb {
+                height: 3px;
+                width: 0;
+                background-color: $pcolor;
+                transition: 0.3s;
+            }
+        }
+    }
+}

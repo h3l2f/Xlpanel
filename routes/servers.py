@@ -25,9 +25,9 @@ def servers():
             eggs=eggsList,
             nodes=nodeList,
             mIt=menuItems,
-            pcolor = pcolor,
-            bcolor = bcolor,
-            tcolor = tcolor,
+            
+            
+            
             coin=check[1]["coin"],
             loadTime=int((time.time()-beginT)*100000)/100000
         )
@@ -51,9 +51,9 @@ def _sv(identity: str):
                     isAdmin=uDt[1].get("root_admin",False),
                     user=check[1]["user"],
                     i=i,
-                    pcolor = pcolor,
-                    bcolor = bcolor,
-                    tcolor = tcolor,
+                    
+                    
+                    
                     mIt=menuItems,
                     coin=check[1]["coin"],
                     loadTime=int((time.time()-beginT)*100000)/100000
@@ -64,9 +64,9 @@ def _sv(identity: str):
             isAdmin=uDt[1].get("root_admin",False),
             user=check[1]["user"],
             error=1,
-            pcolor = pcolor,
-            bcolor = bcolor,
-            tcolor = tcolor,
+            
+            
+            
             mIt=menuItems,
             coin=check[1]["coin"],
             loadTime=int((time.time()-beginT)*100000)/100000

@@ -6,7 +6,7 @@ from flask import jsonify, make_response, redirect, request
 @app.route("/verify/", methods=["GET","POST"])
 def verify():
     if request.method == "GET":
-        return render_template("verify.html", tcolor = tcolor, pcolor = pcolor, bcolor = bcolor, name=name)
+        return render_template("verify.html", name=name)
     else:
         code = request.form.get("code")
         user = request.form.get("user")

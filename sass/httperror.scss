@@ -10,18 +10,18 @@ body {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    border: dashed 1px rgb(255,255,255,0.2);
+    border: dashed 1px rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     user-select: none;
-}
 
-.err * {
-    font-weight: 100;
-    font-family: 'Jetbrain Mono', monospace;
-}
+    * {
+        font-weight: 100;
+        font-family: 'Jetbrain Mono', monospace;
+    }
 
-.err .name {
-    border-left: solid 1px rgb(143, 143, 143);
-    padding-left: 6px;
-    margin-left: 5px;
+    .name {
+        border-left: solid 1px rgb(143, 143, 143);
+        padding-left: 6px;
+        margin-left: 5px;
+    }
 }

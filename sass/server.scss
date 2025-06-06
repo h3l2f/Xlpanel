@@ -1,0 +1,174 @@
+@import "data";
+
+main {
+    padding: 20px;
+    opacity: 0;
+
+    .title {
+        * {
+            font-weight: 100;
+            user-select: none;
+        }
+
+        button {
+            float: right;
+            border: none;
+            width: 100px;
+            @include button($pcolor);
+            padding: 10px;
+            margin-top: 5px;
+        }
+    }
+
+    .sv {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        user-select: none;
+
+        a {
+            width: 100%;
+        }
+
+        .sio {
+            padding: 15px;
+            @include glass(transparentize($pcolor, 0.1));
+            width: 100%;
+            min-width: 250px;
+            max-width: 300px;
+
+            * {
+                font-weight: 100;
+            }
+
+            .info {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .btn {
+                display: flex;
+                gap: 5px;
+
+                button {
+                    width: 100%;
+                    @include button($pcolor);
+                    padding: 5px;
+                    margin-top: 5px;
+                    transition: 0.3s;
+                }
+            }
+        }
+    }
+}
+
+.crSp {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9;
+    background-color: get-bg($bgcolor);
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    user-select: none;
+
+    .form {
+        width: 100%;
+        max-width: 500px;
+        height: fit-content;
+        min-height: 200px;
+        max-height: 400px;
+        margin: auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        @include glass($pcolor);
+        padding: 10px;
+
+        form {
+            .inp {
+                width: 100%;
+                margin-bottom: 16px;
+
+                input {
+                    width: 100%;
+                    font-size: 16px;
+                    @include input($pcolor);
+                }
+
+                select {
+                    width: 100%;
+                    @include input($pcolor);
+                    font-size: 16px;
+
+                    * {
+                        background-color: lighten($pcolor, 10%);
+                    }
+                }
+            }
+
+            .ann {
+                display: flex;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                margin: auto;
+
+                input {
+                    @include button($pcolor);
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+main {
+    :where(.err, .done) {
+        user-select: none;
+        margin-top: 20px;
+        padding: 20px;
+        @include glass(#aa0000);
+
+        * {
+            font-weight: 100;
+        }
+    }
+
+    .done {
+        @include glass(#00aa00)
+    }
+}
+
+/* iserver.html */
+
+main .isv {
+    margin: 20px auto;
+    user-select: none;
+    width: 100%;
+    max-width: 1000px;
+
+    .sio {
+        padding: 15px;
+        @include glass(transparentize($pcolor, 0.1));
+        width: 100%;
+
+        * {
+            font-weight: 100;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            @include button(#aa0000);
+        }
+    }
+}

@@ -1,0 +1,64 @@
+// free light theme
+// $pcolor: #87CEEB;
+// $text-color: #2F4F4F;
+// $bgcolor: #F0F8FF;
+
+//default theme
+$pcolor: #0000aa;
+$text-color: white;
+$bgcolor: #000010;
+
+@function is-light($color) {
+    @return lightness($color) > 50%;
+}
+
+@function get-bg($color) {
+    @if is-light($color) {
+        @return rgba(255, 255, 239, 0.8);
+    }
+    @else {
+        @return rgba(0, 0, 16, 0.8);
+    }
+}
+
+
+
+@mixin glass($color, $mara:16px) {
+    color: $text-color;
+    background: transparentize($color, 0.8);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: $mara;
+    border: 1px solid transparentize($color, 0.7);
+}
+
+@mixin input($color, $mara:10px) {
+    color: $text-color;
+    transition: 0.3s;
+    background-color: transparent;
+    padding: 7px;
+    border-radius: $mara;
+    border: solid 1px transparentize($color, 0.55);
+
+    &:focus {
+        border-color: $color;
+        outline: none;
+    }
+}
+
+@mixin button($color, $mara:10px) {
+    color: $text-color;
+    transition: 0.3s;
+    background-color: transparent;
+    padding: 5px;
+    border-radius: $mara;
+    border: solid 1px transparentize($color, 0.5);
+    cursor: pointer;
+
+    &:hover {
+        border-color: $color;
+    }
+
+    &:active {
+        background-color: $color;
+    }
+}

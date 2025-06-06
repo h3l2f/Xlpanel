@@ -1,0 +1,51 @@
+@import "data";
+
+main {
+    opacity: 0;
+    user-select: none;
+
+    .welcome,
+    .helper {
+        @include glass(transparentize($pcolor, 0.1));
+        padding: 15px;
+        margin: 15px;
+    }
+
+    :where(.welcome, .helper) * {
+        font-weight: 100;
+    }
+
+    .info {
+        @include glass(transparentize($pcolor, 0.1));
+        margin: 15px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 15px;
+
+        .item {
+            @include glass(transparentize($pcolor, 0.1), 10px);
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            .name {
+                font-size: 15px;
+            }
+
+            .i {
+                height: 3px;
+                background-color: darken($pcolor, 7.5%);
+
+                .f {
+                    width: 0%;
+                    height: 100%;
+                    background-color: lighten($pcolor, 5%);
+                }
+            }
+        }
+    }
+}

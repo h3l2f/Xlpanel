@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/statics/css/general.css">
-    <link rel="stylesheet" href="/statics/css/verify.css">
+    <link rel="stylesheet" href="/assets/css/general.css">
+    <link rel="stylesheet" href="/assets/css/verify.css">
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="/statics/img/logo.png" type="image/png">
+    <link rel="shortcut icon" href="/assets/img/logo.png" type="image/png">
     <title>Verify your account</title>
 </head>
 <body>
@@ -37,9 +37,7 @@
 
             code.attr("disabled","")
             btn.attr("disabled","")
-
-            main.css("animation", "border_anim 5s ease-in-out infinite")
-
+            
             let formData = new FormData()
             formData.append("code", code.val())
             formData.append("user", findParam("user"))
@@ -51,8 +49,6 @@
             .then(r => r.json())
             .then(r => {
                 if (!r.status) {
-                    main.css("animation", "none")
-                    main.css("border-color", "#aa0000")
                     btn.removeAttr("disabled")
                     code.removeAttr("disabled")
                     alert(r.message)
@@ -69,42 +65,6 @@
             let expires = "expires="+ d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
-
-        $(document).ready(()=>{
-            $("#code").focus(()=>{
-                $("main").css("border-color", "{{pcolor}}")
-            })
-        })
     </script>
-
-    <!-- v0.2 -->
-    <style>
-        body {
-            background-color: {{bcolor}};
-        }
-        
-        * {
-            color: {{tcolor}} !important;
-        }
-
-        
-        main,
-        main input:focus,
-        main button {
-            border-color: {{pcolor}};
-        }
-
-        main button:disabled {
-            background-color: {{pcolor}}20;
-        }
-
-        main button:active {
-            background-color: {{pcolor}};
-        }
-
-        main input {
-            border-color: {{pcolor}}40;
-        }
-    </style>
 </body>
 </html>

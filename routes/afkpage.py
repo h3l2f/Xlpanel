@@ -20,8 +20,8 @@ def _afk():
             user=check[1]["user"],
             mIt=menuItems,
             coin=check[1]["coin"],
-            pcolor = pcolor,
-            bcolor = bcolor,
-            tcolor = tcolor,
+            
+            
+            
             loadTime=int((time.time()-beginT)*100000)/100000
         )

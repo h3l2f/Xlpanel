@@ -22,9 +22,9 @@ def _store():
             mIt=menuItems,
             coin=check[1]["coin"],
             store=store,
-            pcolor = pcolor,
-            bcolor = bcolor,
-            tcolor = tcolor,
+            
+            
+            
             error=request.args.get("err"),
             loadTime=int((time.time()-beginT)*100000)/100000
         )

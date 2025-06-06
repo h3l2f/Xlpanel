@@ -1,0 +1,27 @@
+body {
+  display: block !important;
+}
+
+.err {
+  width: fit-content;
+  height: fit-content;
+  padding: 20px 30px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border: dashed 1px rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  user-select: none;
+}
+
+.err * {
+  font-weight: 100;
+  font-family: 'Jetbrain Mono', monospace;
+}
+
+.err .name {
+  border-left: solid 1px #8f8f8f;
+  padding-left: 6px;
+  margin-left: 5px;
+}

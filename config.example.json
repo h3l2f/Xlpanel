@@ -1,7 +1,7 @@
 {
     "name": "Xlpanel",
-    "version": "0.2.2",
-    "codename": "sinii khleb",
+    "version": "1.0",
+    "codename": "novaya veshsh",
     "pterodactyl": {
         "host": "your_pterodactyl_host",
         "key": "your_pterodactyl_api_key"
@@ -105,11 +105,5 @@
         "ram": [250, 1024],
         "slot": [1500, 1],
         "_comment": "[price, amount(int)]"
-    },
-    "color": {
-        "primary": "#0000aa",
-        "background": "000010",
-        "text": "white",
-        "_comment": "We only support hex color!"
     }
 }
