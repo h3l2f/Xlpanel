@@ -274,3 +274,19 @@ def chMX(domain):
     except Exception:
         return 0
     else: return len(r)
+
+
+def getPteroPasswd(e):
+    passwd = "".join(random.choice(_chr) for i in range(20))
+    data = {
+            "email": e[1]["email"],
+            "username": e[1]["username"],
+            "first_name": e[1]["first_name"],
+            "last_name": e[1]["last_name"],
+            "password": passwd
+        }
+    try: resp = requests.patch(pteroHost+f"/api/application/users/{e[1]['id']}",json=data, headers=headers)
+    except Exception:
+        return (False, "Something went wrong!")
+    else:
+        return (True, passwd)

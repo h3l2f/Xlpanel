@@ -61,4 +61,11 @@ $bgcolor: #000010;
     &:active {
         background-color: $color;
     }
+
+    &:disabled {
+        border: solid 1px transparentize($color, 0.9);
+        background-color: transparent;
+        color: transparentize($text-color, 0.6);
+        cursor: default;
+    }
 }

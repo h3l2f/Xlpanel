@@ -116,6 +116,33 @@
                         </div>
                     </form>
                 </div>
+                <div class="ptero">
+                    <h3 style="font-weight: 100">Pterodactyl credential</h3>
+                    <div class="inf">
+                        <h4>Username:</h4>
+                        <input type="text" value="{{user}}" disabled>
+                    </div>
+                    <div class="inf">
+                        <h4>Password:</h4>
+                        <input type="text" placeholder="Please reset to view!" id="pteropwd" disabled>
+                    </div>
+                    <button id="pterobtn" onclick="reset()">Reset</button>
+                    <script>
+                        function reset() {
+                            $("#pterobtn").attr("disabled","")
+                            fetch("/account/ptero")
+                            .then(r => r.json())
+                            .then(r => {
+                                if (r.status == "ok") {
+                                    $("#pteropwd").val(r.passwd)
+                                } else {
+                                    alert(r.message)
+                                }
+                                $("#pterobtn").removeAttr("disabled")
+                            })
+                        }
+                    </script>
+                </div>
             </div>
         </main>
         <footer>

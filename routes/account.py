@@ -27,6 +27,20 @@ def yacc():
             loadTime=int((time.time()-beginT)*100000)/100000
         )
 
+@app.route("/account/ptero/", methods=["GET"])
+def pteroPwd():
+    if request.method == "GET":
+        check = helper.chSID(request.cookies.get("sid"))
+        if (not check[0]):
+            return redirect("/login")
+
+        e = helper.checkPteroUser(check[1]["user"])
+        e = helper.getPteroPasswd(e)
+        if e[0]:
+            return jsonify({"status":"ok", "passwd": e[1]})
+        else:
+            return jsonify({"status":"error", "message": e[1]})
+
 @app.route("/account/change/", methods=["POST"])
 def accChange():
     if request.method == "POST":

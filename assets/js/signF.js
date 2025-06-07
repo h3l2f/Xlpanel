@@ -18,7 +18,7 @@ function chEq() {
     }
 
     if (i1.val() != i2.val()) i2.css("border-color","#aa0000");
-    else i2.css("border-color","#0000aa");
+    else i2.css("border-color","");
 }
 
 $(document).ready(()=>{
