@@ -246,10 +246,13 @@ def createPteroServer(name, user, node, egg, cpu, ram, disk):
         return (False, "Not enough slot.")
     
     data = egg["info"]
+    e = getPteroAllocation(node)
+    if not e[0]: #pyright:ignore
+        return (False, "No allocation available.")
     data["name"]=name
     data["user"]=uPdt[1]["id"]
     data["allocation"] = {
-            "default": getPteroAllocation(node)[1]["id"] #pyright:ignore
+            "default": e[1]["id"] #pyright:ignore
         }
     data["limits"] = {
             "memory": ram,
