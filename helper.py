@@ -115,7 +115,7 @@ def checkVcode(user, code):
 
 def register(user, passwd, email, cpu, ram, disk, slot, coin):
 	for i in user:
-		if i not in _chr:
+		if i not in _chr.replace("ABCDEFGHIJKLMNOPQRSTUVWXYZ", ""):
 			return (False, "Username must contain only character and number.")
 	user = user.lower().replace(" ", "")
 	conn = db.connect()
