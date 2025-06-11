@@ -51,9 +51,7 @@ def _sv(identity: str):
                     isAdmin=uDt[1].get("root_admin",False),
                     user=check[1]["user"],
                     i=i,
-                    
-                    
-                    
+                    error = request.args.get("err"),
                     mIt=menuItems,
                     coin=check[1]["coin"],
                     loadTime=int((time.time()-beginT)*100000)/100000
@@ -63,7 +61,7 @@ def _sv(identity: str):
             name=name,
             isAdmin=uDt[1].get("root_admin",False),
             user=check[1]["user"],
-            error=1,
+            error="You don't have permission to modify this server.",
             
             
             

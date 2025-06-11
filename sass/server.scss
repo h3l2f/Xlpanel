@@ -163,12 +163,39 @@ main .isv {
         .info {
             display: flex;
             justify-content: space-between;
+
+            div {
+                display: flex;
+                input {
+                    width: 100%;
+                    @include input($pcolor);
+                }
+                h4 {
+                    padding: 7px 5px;
+                }
+            }
         }
 
-        button {
-            width: 100%;
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .btn {
             margin-top: 20px;
-            @include button(#aa0000);
+            display: flex;
+            gap: 10px;
+
+            button:not(.del) {
+                width: 100%;
+                @include button($pcolor);
+            }
+
+            button.del {
+                width: 100%;
+                @include button(#aa0000);
+            }
         }
     }
 }

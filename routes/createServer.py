@@ -30,7 +30,7 @@ def crsv():
             (int(ram) == 0)
             or
             (int(disk) == 0)
-        ): return redirect(f"/servers?err=invalid data type.")
+        ): return redirect(f"/servers?err=Hi lil exploiter.")
 
         r = helper.createPteroServer(name, check[1]["user"], node, egg, int(cpu), float(ram), float(disk))
         if not r[0]: return redirect(f"/servers?err={r[1]}")

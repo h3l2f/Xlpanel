@@ -62,26 +62,51 @@
         <main>
             <div class="title">
                 <h2>Server detail</h2>
-                {% if not error %}
+                {% if i %}
                 <h4>Here is the detail info for {{i["identifier"]}}</h4>
                 {% endif %}
             </div>
-            {% if error %}
+            {% if error!="none" and error %}
             <div class="err">
-                <h3>Error when loading:</h3>
-                <h4>You don't have permission to modify this server.</h4>
+                <h3>Error:</h3>
+                <h4>{{error}}</h4>
             </div>
-            {% else %}
+            {% elif error=="none" %}
+            <div class="done">
+                <h3>Your server resources has been modified.</h3>
+            </div>
+            {% endif %}
+            {% if i %}
             <div class="isv">
                 <div class="sio">
-                    <h2 style="overflow-x: hidden;
-                                text-overflow: ellipsis;">{{i["name"]}}</h2>
-                    <h6 style="margin-bottom: 20px">{{i['identifier']}}</h6>
-                    <div class="info" style="margin-top: 5px"><h4>CPU:</h4><h4>{{i["limits"]["cpu"]}}%</h4></div>
-                    <div class="info" style="margin-top: 5px"><h4>Ram:</h4><h4>{{i["limits"]["memory"]}}MB</h4></div>
-                    <div class="info" style="margin-top: 5px"><h4>Disk:</h4><h4>{{i["limits"]["disk"]}}MB</h4></div>
-                    <div class="info" style="margin-top: 5px"><h4>Status:</h4><h4>{{i.get("status") if i.get("status") else "active"}}</h4></div>
-                    <button onclick="del()">Delete</button>
+                    <form action="edit" method="get">
+                        <h2 style="overflow-x: hidden;
+                                    text-overflow: ellipsis;">{{i["name"]}}</h2>
+                        <h6 style="margin-bottom: 15px">{{i['identifier']}}</h6>
+                        <div class="info">
+                            <h4>CPU:</h4>
+                            <div>
+                                <input type="number" min="1" max="99999" name="cpu" value='{{i["limits"]["cpu"]}}'></input><h4>%</h4>&nbsp;
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h4>Ram:</h4>
+                            <div>
+                                <input type="number" min="1" max="99999" name="ram" value='{{i["limits"]["memory"]}}'></input><h4>MB</h4>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h4>Disk:</h4>
+                            <div>
+                                <input type="number" min="1" max="99999" name="disk" inputmode="numeric" value='{{i["limits"]["disk"]}}'></input><h4>MB</h4>
+                            </div>
+                        </div>
+                        <div class="info"><h4>Status:</h4><h4>{{i.get("status") if i.get("status") else "active"}}</h4></div>
+                        <div class="btn">
+                            <button type="button" class="del" onclick="del()">Delete</button>
+                            <button>Update</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             {% endif %}

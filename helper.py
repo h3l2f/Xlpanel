@@ -298,3 +298,40 @@ def getPteroPasswd(e):
 		return (False, "Something went wrong!")
 	else:
 		return (True, passwd)
+
+def editPteroServer(user, identifier, cpu, ram, disk):
+	uDt = getUser(user)
+	uSv = listPteroServer(user)
+	for i in uSv[1]:
+		if i["identifier"] == identifier: #pyright:ignore
+			if i["status"] == "suspended": #pyright:ignore
+				return (False,"This server has been suspended.")
+			
+			ucpu = uDt[1]["cpu"]-uSv[2] #pyright: ignore
+			udisk = uDt[1]["disk"]-uSv[3] #pyright: ignore
+			uram = uDt[1]["ram"]-uSv[4] #pyright: ignore
+			ccpu = i["limits"]["cpu"] #pyright: ignore
+			cdisk = i["limits"]["disk"] #pyright: ignore
+			cram = i["limits"]["memory"] #pyright: ignore
+
+			if (ucpu < (cpu - ccpu)):
+				return (False, "Not enough cpu.")
+			elif (udisk < (disk - cdisk)):
+				return (False, "Not enough disk.")
+			elif (uram < (ram - cram)):
+				return (False, "Not enough ram.")
+
+			data = {
+				"allocation": i["allocation"], #pyright: ignore
+				"memory": ram,
+				"swap": i["limits"]["swap"], #pyright: ignore
+				"disk": disk,
+				"io": i["limits"]["io"], #pyright: ignore
+				"cpu": cpu,
+				"feature_limits": i["feature_limits"] #pyright: ignore
+			}
+
+			resp = requests.patch(pteroHost+f"/api/application/servers/{i['id']}/build", json=data, headers=headers).json() #pyright: ignore
+			if (resp.get("errors")): return (False, resp["errors"][0])
+			return (True, resp)
+	return (False,"You don't have permission to modify this server.")
