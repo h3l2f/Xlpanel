@@ -27,6 +27,7 @@ def genSID():
 	return "s."+"".join(random.choice(_chr) for i in range(random.randint(60, 90)))
 
 def addSID(sid, user):
+	sid = ende.hash(sid)
 	conn = db.connect()
 	cursor = conn.cursor()
 	cursor.execute("insert into session (sid, passport, alive) values (?, ?, ?)", (sid, user, time.time()+86400*15))
@@ -136,6 +137,7 @@ def register(user, passwd, email, cpu, ram, disk, slot, coin):
 	return (True,)
 
 def logout(sid):
+	sid = ende.hash(sid)
 	conn = db.connect()
 	cursor = conn.cursor()
 	cursor.execute("delete from session where sid=?",(sid,))
@@ -145,7 +147,7 @@ def logout(sid):
 def chSID(sid):
 	conn = db.connect()
 	cursor = conn.cursor()
-
+	sid = ende.hash(sid)
 	cursor.execute("select * from session where sid=?",(sid,))
 	result = cursor.fetchall()
 
