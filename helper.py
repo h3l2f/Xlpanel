@@ -58,9 +58,7 @@ def login(user, passwd):
 	if result[0][8]==0:
 		conn = db.connect()
 		cursor = conn.cursor()
-
 		code = "".join(random.choice(_chr) for i in range(6))
-
 		try:
 			cursor.execute("insert into verify (user, email, code) values (?, ?, ?)", (result[0][0], result[0][2], code))
 		except Exception:
@@ -71,8 +69,9 @@ def login(user, passwd):
 		e = sendVerify(result[0][2], code)
 		if e[0] == False:
 			return (False, "Cannot send verify mail.")
-
 		return (False, "verify", result[0][0])
+	elif result[0][10]:
+		return (False, "banned")
 	sid = genSID()
 	addSID(sid, user)
 	return (True, sid)
@@ -89,7 +88,8 @@ def getUser(user):
 			"cpu": result[0][4],
 			"disk": result[0][5],
 			"ram": result[0][6],
-			"coin": result[0][7]
+			"coin": result[0][7],
+			"banned": result[0][10]
 		}
 	return (True, result)
 
@@ -157,6 +157,9 @@ def chSID(sid):
 			return (False,)
 		cursor.execute("select * from user where user=?",(result[0][1],))
 		result = cursor.fetchall()
+		if result[0][10]:
+			logout(sid)
+			return (False, "banned")
 		result = {
 			"user": result[0][0],
 			"pwd": result[0][1],
@@ -164,7 +167,8 @@ def chSID(sid):
 			"cpu": result[0][4],
 			"disk": result[0][5],
 			"ram": result[0][6],
-			"coin": result[0][7]
+			"coin": result[0][7],
+			"banned": result[0][10]
 		}
 		return (True, result)
 

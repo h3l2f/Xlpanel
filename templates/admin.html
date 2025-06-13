@@ -75,7 +75,7 @@
             </div>
             {% if error!="none" and error %}
             <div class="err">
-                <h3>Error on modify:</h3>
+                <h3>Error:</h3>
                 <h4>{{error}}</h4>
             </div>
             {% elif error=="none" %}
@@ -83,7 +83,7 @@
                 <h3>Done.</h3>
             </div>
             {% endif %}
-             <div class="form addRs">
+            <div class="form addRs">
                 <h3>Add resources</h3>
                 <form action="/admin/add">
                     <div class="e">
@@ -108,7 +108,55 @@
                     </div>
                     <button>Submit</button>
                 </form>
-             </div>
+            </div>
+            <div class="userManager">
+                <h3>Manage users</h3>
+                {% for i in ul %}
+                <div class="user">
+                    <div class="info">
+                        <div class="inf">
+                            <h4>Username:</h4>
+                            <h4>{{i[0]}}</h4>
+                        </div>
+                        <div class="inf">
+                            <h4>coin:</h4>
+                            <h4>{{i[1]}}</h4>
+                        </div>
+                        <div class="res">
+                            <div>
+                                <h5>
+                                    <i class="fa-solid fa-microchip"></i>
+                                </h5>
+                                <h5>
+                                    {{i[2]}}%
+                                </h5>
+                            </div>
+                            <div>
+                                <h5>
+                                    <i class="fa-solid fa-hard-drive"></i>
+                                </h5>
+                                <h5>
+                                    {{i[3]}}MB
+                                </h5>
+                            </div>
+                            <div>
+                                <h5>
+                                    <i class="fa-solid fa-memory"></i>
+                                </h5>
+                                <h5>
+                                    {{i[4]}}MB
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action">
+                        {% if i[0] != user %}
+                        <button onclick="window.location = '/admin/ban/{{i[0]}}'">{{"Unb" if i[5] else "B"}}an</button>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </main>
         <footer>
             <div class="text">

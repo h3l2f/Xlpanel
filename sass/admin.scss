@@ -81,4 +81,61 @@ main {
             @include button($pcolor);
         }
     }
+
+    .userManager {
+        user-select: none;
+        padding: 16px;
+        margin-top: 20px;
+        @include glass(transparentize($pcolor, 0.1));
+
+        h4, h5 {
+            font-weight: 100;
+        }
+
+        .user {
+            @include glass(transparentize($pcolor, 0.1));
+            padding: 16px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+
+                .inf {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 5px;
+                }
+
+                .res {
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+
+                    div {
+                        display: flex;
+                        gap: 3px;
+                    }
+                }
+            }
+
+            .action {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
+                max-width: 100px;
+
+                button {
+                    @include button(#aa0000);
+                    width: 100%;
+                }
+            }
+        }
+    }
 }

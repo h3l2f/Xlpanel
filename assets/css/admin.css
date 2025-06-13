@@ -125,4 +125,81 @@ main .form button:disabled {
   background-color: transparent;
   color: rgba(255, 255, 255, 0.4);
   cursor: default;
+}
+main .userManager {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 16px;
+  margin-top: 20px;
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+}
+main .userManager h4, main .userManager h5 {
+  font-weight: 100;
+}
+main .userManager .user {
+  color: white;
+  background: rgba(0, 0, 170, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 170, 0.2);
+  padding: 16px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+main .userManager .user .info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+main .userManager .user .info .inf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+main .userManager .user .info .res {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+main .userManager .user .info .res div {
+  display: flex;
+  gap: 3px;
+}
+main .userManager .user .action {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  max-width: 100px;
+}
+main .userManager .user .action button {
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(170, 0, 0, 0.5);
+  cursor: pointer;
+  width: 100%;
+}
+main .userManager .user .action button:hover {
+  border-color: #aa0000;
+}
+main .userManager .user .action button:active {
+  background-color: #aa0000;
+}
+main .userManager .user .action button:disabled {
+  border: solid 1px rgba(170, 0, 0, 0.1);
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: default;
 }/*# sourceMappingURL=admin.css.map */
