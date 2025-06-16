@@ -129,11 +129,15 @@ main {
                 flex-direction: column;
                 gap: 5px;
                 width: 100%;
-                max-width: 100px;
+                max-width: 200px;
 
                 button {
-                    @include button(#aa0000);
                     width: 100%;
+                    @include button($pcolor);
+
+                    &:where(.del) {
+                        @include button(#aa0000);
+                    }
                 }
             }
         }

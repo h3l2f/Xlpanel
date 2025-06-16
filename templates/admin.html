@@ -111,12 +111,21 @@
             </div>
             <div class="userManager">
                 <h3>Manage users</h3>
+                <h5>Total user: {{len(ul)}}</h5>
                 {% for i in ul %}
                 <div class="user">
                     <div class="info">
                         <div class="inf">
                             <h4>Username:</h4>
-                            <h4>{{i[0]}}</h4>
+                            <h4 style="user-select: text">{{i[0]}}</h4>
+                        </div>
+                        <div class="inf">
+                            <h4>Email:</h4>
+                            <h4 style="user-select: text">{{i[6]}}</h4>
+                        </div>
+                        <div class="inf">
+                            <h4>Verified:</h4>
+                            <h4 {% if not i[7] %} style="color: #aa0000" {% endif %}>{{"True" if i[7] else "False"}}</h4>
                         </div>
                         <div class="inf">
                             <h4>coin:</h4>
@@ -151,7 +160,8 @@
                     </div>
                     <div class="action">
                         {% if i[0] != user %}
-                        <button onclick="window.location = '/admin/ban/{{i[0]}}'">{{"Unb" if i[5] else "B"}}an</button>
+                        <button class="del" onclick="window.location = '/admin/ban/{{i[0]}}'">{{"Unb" if i[5] else "B"}}an</button>
+                        <button onclick="window.location = '/admin/createPtero/{{i[0]}}/{{i[6]}}'">Create panel account</button>
                         {% endif %}
                     </div>
                 </div>

@@ -20,7 +20,7 @@ def ad():
         if (uDt[1].get("root_admin",False)):
             conn = db.connect()
             cursor = conn.cursor()
-            cursor.execute("select user, coin, cpu, disk, ram, banned from user")
+            cursor.execute("select user, coin, cpu, disk, ram, banned, email, verified from user")
             e = cursor.fetchall()
             conn.close()
             return render_template(
@@ -115,4 +115,23 @@ def _adb(user):
             conn.commit()
             conn.close()
             return redirect("/admin?err=none")
+        else: abort(403)
+
+@app.route("/admin/createPtero/<user>/<email>/", methods=["GET"])
+def _pterocreate(user, email):
+    if request.method == "GET":
+        beginT = time.time()
+        check = helper.chSID(request.cookies.get("sid"))
+        if (not check[0]):
+            return redirect("/login")
+
+        uDt = helper.checkPteroUser(check[1]["user"])
+        if (uDt[0] == False):
+            return f"""Something went wrong!\n\nuDt response:\n{uDt}"""
+
+        if (uDt[1].get("root_admin",False)):
+            e = helper.createPteroUser(user, email)
+            print(e)
+            if e.get("errors"): return redirect(f"/admin?err={e['errors'][0]}")
+            else: return redirect("/admin?err=none")
         else: abort(403)

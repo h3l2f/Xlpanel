@@ -179,9 +179,31 @@ main .userManager .user .action {
   flex-direction: column;
   gap: 5px;
   width: 100%;
-  max-width: 100px;
+  max-width: 200px;
 }
 main .userManager .user .action button {
+  width: 100%;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.5);
+  cursor: pointer;
+}
+main .userManager .user .action button:hover {
+  border-color: #0000aa;
+}
+main .userManager .user .action button:active {
+  background-color: #0000aa;
+}
+main .userManager .user .action button:disabled {
+  border: solid 1px rgba(0, 0, 170, 0.1);
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: default;
+}
+main .userManager .user .action button:where(.del) {
   color: white;
   transition: 0.3s;
   background-color: transparent;
@@ -189,15 +211,14 @@ main .userManager .user .action button {
   border-radius: 10px;
   border: solid 1px rgba(170, 0, 0, 0.5);
   cursor: pointer;
-  width: 100%;
 }
-main .userManager .user .action button:hover {
+main .userManager .user .action button:where(.del):hover {
   border-color: #aa0000;
 }
-main .userManager .user .action button:active {
+main .userManager .user .action button:where(.del):active {
   background-color: #aa0000;
 }
-main .userManager .user .action button:disabled {
+main .userManager .user .action button:where(.del):disabled {
   border: solid 1px rgba(170, 0, 0, 0.1);
   background-color: transparent;
   color: rgba(255, 255, 255, 0.4);

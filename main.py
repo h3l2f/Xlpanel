@@ -14,6 +14,7 @@ app.jinja_env.globals.update(request=request)
 app.jinja_env.globals.update(min=min)
 app.jinja_env.globals.update(max=max)
 app.jinja_env.globals.update(int=int)
+app.jinja_env.globals.update(len=len)
 
 app.config['SOCK_SERVER_OPTIONS'] = {'ping_interval': 2}
 

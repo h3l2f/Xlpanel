@@ -2,6 +2,7 @@ import bcrypt
 import hashlib
 
 def hash(inp):
+    if (not inp): inp=""
     input_bytes = inp.encode('utf-8')
     sha256_hash = hashlib.sha256()
     sha256_hash.update(input_bytes)
