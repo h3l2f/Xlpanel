@@ -22,6 +22,7 @@ def yacc():
             isAdmin=uDt[1].get("root_admin",False),
             user=check[1]["user"],
             coin=check[1]["coin"],
+            email=check[1]["email"],
             error = request.args.get("err", None),
             mIt=menuItems,
             loadTime=int((time.time()-beginT)*100000)/100000

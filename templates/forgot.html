@@ -35,7 +35,7 @@
             formData.append("email", code.val())
             main.css("animation", "border_anim 5s ease-in-out infinite")
 
-            fetch("/forgot", {
+            fetch("/forgot/", {
             method: "POST",
             body: formData
             })

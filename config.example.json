@@ -86,10 +86,13 @@
     },
     "locations": {
         "1": {
-            "name": "lorem"
+            "name": "lorem",
+            "limit": 100,
+            "limit_comment": "Set to -1 to disable the limit on that node."
         },
         "2": {
-            "name": "lorem1"
+            "name": "lorem1",
+            "limit": 20
         }
     },
     "location_comment": "\"<nodeID>\": {\"name\": '<name>'}",

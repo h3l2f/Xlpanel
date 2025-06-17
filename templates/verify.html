@@ -43,7 +43,7 @@
             formData.append("code", code.val())
             formData.append("user", findParam("user"))
 
-            fetch("/verify", {
+            fetch("/verify/", {
             method: "POST",
             body: formData
             })

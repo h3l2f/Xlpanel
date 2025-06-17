@@ -34,12 +34,19 @@ def addSID(sid, user):
 	conn.commit()
 	conn.close()
 
+def countPteroServer(nodeID):
+	count = 0
+	resp = requests.get(pteroHost+f"/api/application/servers/", headers=headers).json() #pyright: ignore
+	for i in resp["data"]:
+		if (i["attributes"]["node"] == nodeID) and (not i["attributes"]["suspended"]): count+=1
+	return count
+
 def createPteroUser(user, email):
 	data = {
 	"email": email,
-	"username": user,
+	"username": ende.hash(user),
 	"first_name": ".",
-	"last_name": user
+	"last_name": ende.hash(user)[:10]
 	}
 	resp = requests.post(pteroHost+"/api/application/users",json=data, headers=headers)
 	return resp.json()
@@ -85,6 +92,7 @@ def getUser(user):
 	if not len(result): return (False, "User not found.")
 	result = {
 			"user": result[0][0],
+			"email": result[0][2],
 			"slot": result[0][3],
 			"cpu": result[0][4],
 			"disk": result[0][5],
@@ -115,9 +123,8 @@ def checkVcode(user, code):
 	return (True, sid)
 
 def register(user, passwd, email, cpu, ram, disk, slot, coin):
-	for i in user:
-		if i not in _chr.replace("ABCDEFGHIJKLMNOPQRSTUVWXYZ", ""):
-			return (False, "Username must contain only lower-case characters and numbers.")
+	if not user.isascii():
+		return (False, "Username must contain only latin characters.")
 	user = user.lower().replace(" ", "")
 	conn = db.connect()
 	cursor = conn.cursor()
@@ -165,6 +172,7 @@ def chSID(sid):
 		result = {
 			"user": result[0][0],
 			"pwd": result[0][1],
+			"email": result[0][2],
 			"slot": result[0][3],
 			"cpu": result[0][4],
 			"disk": result[0][5],
@@ -175,11 +183,14 @@ def chSID(sid):
 		return (True, result)
 
 def checkPteroUser(name):
+	e = getUser(name)
+	if not e[0]:
+		return (False, "nf")
 	resp = requests.get(pteroHost+"/api/application/users?per_page=9999", headers=headers).json()
 	if (resp.get("errors")): return (False, resp["errors"][0])
 	else:
 		for i in (resp["data"]):
-			if i["attributes"]["username"] == name:
+			if i["attributes"]["email"] == e[1]["email"]: #pyright: ignore
 				return (True, i["attributes"])
 		return (False, "nf")
 
@@ -243,6 +254,11 @@ def createPteroServer(name, user, node, egg, cpu, ram, disk):
 	if node not in list(config["locations"].keys()):
 		return (False, "Node not found.")
 	
+	if config["locations"][node]["limit"] != -1:
+		serverCount = countPteroServer(int(node))
+		if (serverCount >= config["locations"][node]["limit"]):
+			return (False, f"Out of slot! ({serverCount}/{config['locations'][node]['limit']})")
+
 	ucpu = uDt[1]["cpu"]-uSv[2] #pyright: ignore
 	udisk = uDt[1]["disk"]-uSv[3] #pyright: ignore
 	uram = uDt[1]["ram"]-uSv[4] #pyright: ignore

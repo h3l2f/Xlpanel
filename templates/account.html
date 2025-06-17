@@ -120,8 +120,8 @@
                 <div class="ptero">
                     <h3 style="font-weight: 100">Pterodactyl credential</h3>
                     <div class="inf">
-                        <h4>Username:</h4>
-                        <input type="text" value="{{user}}" disabled>
+                        <h4>Email:</h4>
+                        <input type="text" value="{{email}}" disabled>
                     </div>
                     <div class="inf">
                         <h4>Password:</h4>
@@ -131,7 +131,7 @@
                     <script>
                         function reset() {
                             $("#pterobtn").attr("disabled","")
-                            fetch("/account/ptero")
+                            fetch("/account/ptero/")
                             .then(r => r.json())
                             .then(r => {
                                 if (r.status == "ok") {
