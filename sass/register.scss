@@ -52,14 +52,35 @@ main {
     max-width: 100%;
 }
 
+.main {
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        margin: auto;
+
+        button {
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+            margin-top: 10px;
+            @include button($pcolor);
+        }
+    }
+}
+
 .main .form {
     height: fit-content;
-
-    /* width: fit-content; */
     margin: auto;
     position: relative;
     top: 50%;
     transform: translate(0, -50%);
+
+    .cf-turnstile {
+        width: 100%;
+        max-width: 300px;
+        margin: auto;
+        margin-top: 10px;
+    }
 
     .inp {
         margin: auto;

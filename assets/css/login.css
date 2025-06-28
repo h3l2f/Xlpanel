@@ -9,10 +9,7 @@ main {
   padding: 50px;
   max-width: 1500px;
   max-height: 750px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 
 .main {
@@ -36,22 +33,63 @@ main {
   max-width: 100%;
 }
 
+.main .btn {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+.main .btn button {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+  margin-top: 10px;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 170, 0.5);
+  cursor: pointer;
+}
+
+.main .btn button:hover {
+  border-color: #0000aa;
+}
+
+.main .btn button:active {
+  background-color: #0000aa;
+}
+
+.main .btn button:disabled {
+  border: solid 1px rgba(0, 0, 170, 0.1);
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: default;
+}
+
 .main .form {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
-  /* width: fit-content; */
   margin: auto;
   position: relative;
   top: 50%;
   transform: translate(0, -50%);
 }
+
+.main .form .cf-turnstile {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+  margin-top: 10px;
+}
+
 .main .form .inp {
   margin: auto;
   margin-top: 10px;
   width: 100%;
   max-width: 300px;
 }
+
 .main .form .inp input {
   color: white;
   transition: 0.3s;
@@ -61,13 +99,16 @@ main {
   border: solid 1px rgba(0, 0, 170, 0.45);
   width: 100%;
 }
+
 .main .form .inp input:focus {
   border-color: #0000aa;
   outline: none;
 }
+
 .main .form .passwd {
   display: flex;
 }
+
 .main .form .passwd button {
   padding: 0 5px;
   margin-left: 5px;
@@ -80,24 +121,29 @@ main {
   border: solid 1px rgba(0, 0, 170, 0.5);
   cursor: pointer;
 }
+
 .main .form .passwd button:hover {
   border-color: #0000aa;
 }
+
 .main .form .passwd button:active {
   background-color: #0000aa;
 }
+
 .main .form .passwd button:disabled {
   border: solid 1px rgba(0, 0, 170, 0.1);
   background-color: transparent;
   color: rgba(255, 255, 255, 0.4);
   cursor: default;
 }
+
 .main .form .submit {
   width: 100%;
   max-width: 300px;
   margin: auto;
   margin-top: 10px;
 }
+
 .main .form .submit input {
   width: 100%;
   color: white;
@@ -110,18 +156,22 @@ main {
   background-color: #000044;
   margin-bottom: 5px;
 }
+
 .main .form .submit input:hover {
   border-color: #0000aa;
 }
+
 .main .form .submit input:active {
   background-color: #0000aa;
 }
+
 .main .form .submit input:disabled {
   border: solid 1px rgba(0, 0, 170, 0.1);
   background-color: transparent;
   color: rgba(255, 255, 255, 0.4);
   cursor: default;
 }
+
 .main .form .error {
   padding: 5px;
   text-align: center;
@@ -139,4 +189,4 @@ main {
   .img {
     display: none;
   }
-}/*# sourceMappingURL=login.css.map */
+}

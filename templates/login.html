@@ -10,6 +10,7 @@
     <script src="/assets/js/signF.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="/assets/img/logo.png" type="image/png">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
     <title>Login - {{name}}</title>
 </head>
 <body>
@@ -34,6 +35,9 @@
                             <i d="f" class="fa-regular fa-eye-slash" style="display: none"></i>
                         </button>
                     </div>
+                    {% if cf_enable %}
+                    <div class="cf-turnstile" data-sitekey="{{cf_site_key}}"></div>
+                    {% endif %}
                     <div class="submit">
                         <input type="submit" value="Sign In">
                         <a href="/forgot" style="float: right"><h5>forgot password?</h5></a>

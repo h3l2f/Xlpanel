@@ -2,18 +2,14 @@ main {
   padding: 20px;
   opacity: 0;
 }
+
 main .title * {
   font-weight: 100;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
 }
+
 main .info {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   padding: 16px;
   margin: 20px auto;
   width: 100%;
@@ -24,12 +20,15 @@ main .info {
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 170, 0.2);
 }
+
 main .info .r {
   margin-bottom: 10px;
 }
+
 main .info .r * {
   font-weight: 100;
 }
+
 main .info .cpass {
   padding: 20px;
   color: white;
@@ -38,11 +37,13 @@ main .info .cpass {
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 170, 0.2);
 }
+
 main .info .cpass form .inp {
   display: flex;
   width: 100%;
   margin-top: 10px;
 }
+
 main .info .cpass form .inp input {
   width: 100%;
   color: white;
@@ -52,10 +53,12 @@ main .info .cpass form .inp input {
   border-radius: 10px;
   border: solid 1px rgba(0, 0, 170, 0.45);
 }
+
 main .info .cpass form .inp input:focus {
   border-color: #0000aa;
   outline: none;
 }
+
 main .info .cpass form .inp button {
   padding: 0 5px;
   margin-left: 5px;
@@ -69,24 +72,29 @@ main .info .cpass form .inp button {
   border: solid 1px rgba(0, 0, 170, 0.5);
   cursor: pointer;
 }
+
 main .info .cpass form .inp button:hover {
   border-color: #0000aa;
 }
+
 main .info .cpass form .inp button:active {
   background-color: #0000aa;
 }
+
 main .info .cpass form .inp button:disabled {
   border: solid 1px rgba(0, 0, 170, 0.1);
   background-color: transparent;
   color: rgba(255, 255, 255, 0.4);
   cursor: default;
 }
+
 main .info .cpass form .submit {
   width: 100%;
   max-width: 300px;
   margin: auto;
   margin-top: 10px;
 }
+
 main .info .cpass form .submit input {
   color: white;
   transition: 0.3s;
@@ -98,18 +106,22 @@ main .info .cpass form .submit input {
   width: 100%;
   cursor: pointer;
 }
+
 main .info .cpass form .submit input:hover {
   border-color: #0000aa;
 }
+
 main .info .cpass form .submit input:active {
   background-color: #0000aa;
 }
+
 main .info .cpass form .submit input:disabled {
   border: solid 1px rgba(0, 0, 170, 0.1);
   background-color: transparent;
   color: rgba(255, 255, 255, 0.4);
   cursor: default;
 }
+
 main .info .ptero {
   padding: 20px;
   color: white;
@@ -122,6 +134,7 @@ main .info .ptero {
   flex-direction: column;
   gap: 10px;
 }
+
 main .info .ptero button {
   color: white;
   transition: 0.3s;
@@ -134,23 +147,28 @@ main .info .ptero button {
   max-width: 300px;
   margin: auto;
 }
+
 main .info .ptero button:hover {
   border-color: #0000aa;
 }
+
 main .info .ptero button:active {
   background-color: #0000aa;
 }
+
 main .info .ptero button:disabled {
   border: solid 1px rgba(0, 0, 170, 0.1);
   background-color: transparent;
   color: rgba(255, 255, 255, 0.4);
   cursor: default;
 }
+
 main .info .ptero .inf {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
+
 main .info .ptero .inf input {
   color: white;
   transition: 0.3s;
@@ -160,18 +178,18 @@ main .info .ptero .inf input {
   border: solid 1px rgba(0, 0, 170, 0.45);
   width: 100%;
 }
+
 main .info .ptero .inf input:focus {
   border-color: #0000aa;
   outline: none;
 }
+
 main .info .ptero .inf h4 {
   font-weight: 100;
 }
+
 main :where(.err, .done) {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   margin-top: 20px;
   padding: 20px;
   color: white;
@@ -180,13 +198,15 @@ main :where(.err, .done) {
   border-radius: 16px;
   border: 1px solid rgba(170, 0, 0, 0.3);
 }
+
 main :where(.err, .done) * {
   font-weight: 100;
 }
+
 main .done {
   color: white;
   background: rgba(0, 170, 0, 0.2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   border: 1px solid rgba(0, 170, 0, 0.3);
-}/*# sourceMappingURL=account.css.map */
+}

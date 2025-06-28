@@ -4,12 +4,12 @@
 <img src="https://img.shields.io/badge/Codename-novaya_veshsh-0000aa.svg"></img>
 </div>
 
-# Update: v1.0 (novaya veshsh)
+# Major Update: v1.0 (novaya veshsh)
 > Just renew everything!
 
-# Change logs: v1.0
-- New UI
-- New Experience
+# Change logs: v1.0.1
+- Add Cloudflare Turnstile for anti bot
+- Small change of UI
 
 # Key features
 * Manage your pterodactyl server

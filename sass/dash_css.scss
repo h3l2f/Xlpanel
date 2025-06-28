@@ -26,7 +26,7 @@ body {
 .nav {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 65px;
     max-width: 200px;
     min-width: 65px;
     height: 100%;
@@ -48,6 +48,7 @@ body {
         margin-top: 30px;
         height: 100%;
         overflow-y: auto;
+        overflow-x: hidden;
         padding-bottom: 30px;
 
         a {
@@ -57,10 +58,20 @@ body {
             .it {
                 padding: 10px;
                 margin: 5px;
+                // height: 43px;
                 color: $text-color;
                 border-radius: 10px;
                 transition: 0.2s;
                 border: solid 1px transparent;
+                display: flex;
+                gap: 5px;
+
+                .icon {
+                    width: 22px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
             }
 
             &:hover .it {
@@ -79,6 +90,10 @@ body {
         max-width: 200px;
         padding: 10px;
         @include glass(transparentize($pcolor, 0.1), 10px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow-x: clip;
 
         * {
             font-weight: 100;
@@ -88,10 +103,38 @@ body {
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        .one {
+            max-width: 75%;
+        }
+
+        .two {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+
+            button {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                @include button(#aa0000, 5px);
+                padding: 5px;
+
+                svg {
+
+                    path {
+                        fill: darken(#aa0000, 15%);
+                    }
+                }
+            }
+        }
     }
 
     #menuToggle {
         background-color: transparentize($pcolor, 0.85);
+        display: none;
     }
 
     .items .sp .it {
@@ -112,17 +155,33 @@ body {
     }
 
     footer {
-        height: 50px;
         width: 100%;
         @include glass(transparentize($pcolor, 0.15),0);
         user-select: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
 
         .text {
             height: fit-content;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 0 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 5px;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+
+            h5 {
+                word-break: break-word;
+            }
+
+            h6 {
+                display: flex;
+                gap: 5px;
+            }
 
             * {
                 font-weight: 100;
@@ -139,6 +198,21 @@ main {
     overflow-x: auto;
 }
 
+@media only screen and (min-width: 601px) {
+    .nav {
+        width: 100% !important;
+
+        .name {display: block !important;}
+        .items .it it {
+            display: flex !important;
+        }
+
+        .users {
+            display: flex !important;
+        }
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .nav {
 
@@ -148,7 +222,6 @@ main {
             display: none;
         }
 
-        width: 55px;
         position: fixed;
         z-index: 2;
         height: 100%;
@@ -167,11 +240,9 @@ main {
     }
 
     .nav .items {
-        .it {
-            text-align: center;
-        }
-
         margin-top: 10px;
         padding-bottom: 30px;
     }
+
+    #menuToggle {display: flex !important;}
 }

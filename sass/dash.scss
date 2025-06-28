@@ -11,6 +11,28 @@ main {
         margin: 15px;
     }
 
+    .helper {
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h4 {
+            text-align: center;
+        }
+
+        .btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            button {
+                @include button($pcolor);
+                padding: 10px;
+            }
+        }
+    }
+
     :where(.welcome, .helper) * {
         font-weight: 100;
     }

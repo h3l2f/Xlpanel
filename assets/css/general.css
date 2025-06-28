@@ -2,6 +2,7 @@
   font-family: jetbrain;
   src: url(/assets/font/jetbrains-mono.ttf);
 }
+
 body,
 html {
   height: 100vh;
@@ -16,38 +17,30 @@ html {
   box-sizing: border-box;
   font-family: jetbrain;
 }
+
 *::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
+
 *::-webkit-scrollbar-track {
   background: #000044;
   border-radius: 10px;
 }
+
 *::-webkit-scrollbar-thumb {
   background: #000091;
   border-radius: 10px;
-  -webkit-transition: 0.3s;
   transition: 0.3s;
 }
+
 *::-webkit-scrollbar-thumb:hover {
   background: #0000aa;
 }
 
 a {
   text-decoration: none;
-  color: rgb(0, 68, 255) !important;
-}
-
-@-webkit-keyframes showing {
-  from {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
+  color: #0044ff !important;
 }
 
 @keyframes showing {
@@ -60,70 +53,56 @@ a {
     opacity: 1;
   }
 }
+
 .loader {
   --c: no-repeat linear-gradient(#0000aa 0 0);
   background: var(--c), var(--c), var(--c), var(--c);
-  -webkit-animation: l19-1 1.5s infinite, l19-2 1.5s infinite;
-          animation: l19-1 1.5s infinite, l19-2 1.5s infinite;
+  animation: l19-1 1.5s infinite, l19-2 1.5s infinite;
 }
+
 .loader:before, .loader:after {
   --c: no-repeat linear-gradient(#0000aa 0 0);
   background: var(--c), var(--c), var(--c), var(--c);
-  -webkit-animation: l19-1 1.5s infinite, l19-2 1.5s infinite;
-          animation: l19-1 1.5s infinite, l19-2 1.5s infinite;
+  animation: l19-1 1.5s infinite, l19-2 1.5s infinite;
 }
+
 .loader:before {
   content: "";
   grid-area: 1/1;
   transform: translate(calc(50% - 2px), calc(2px - 50%)) rotate(90deg);
-  -webkit-animation-delay: -0.25s;
-          animation-delay: -0.25s;
+  animation-delay: -.25s;
 }
+
 .loader:after {
   content: "";
   grid-area: 1/1;
   transform: translate(calc(50% - 2px), calc(2px - 50%)) rotate(90deg);
-  -webkit-animation-delay: -0.25s;
-          animation-delay: -0.25s;
+  animation-delay: -.25s;
   transform: translate(calc(2px - 50%), calc(50% - 2px)) rotate(90deg);
 }
 
-@-webkit-keyframes l19-1 {
-  0%, 10% {
+@keyframes l19-1 {
+  0%,
+10% {
     background-size: 0 4px, 4px 0;
   }
-  40%, 60% {
+  40%,
+60% {
     background-size: 100% 4px, 4px 100%;
   }
-  90%, 100% {
+  90%,
+100% {
     background-size: 0 4px, 4px 0;
   }
 }
 
-@keyframes l19-1 {
-  0%, 10% {
-    background-size: 0 4px, 4px 0;
-  }
-  40%, 60% {
-    background-size: 100% 4px, 4px 100%;
-  }
-  90%, 100% {
-    background-size: 0 4px, 4px 0;
-  }
-}
-@-webkit-keyframes l19-2 {
-  0%, 49.9% {
-    background-position: 0 0, 0 0, 100% 100%, 100% 100%;
-  }
-  50%, 100% {
-    background-position: 100% 0, 0 100%, 0 100%, 100% 0;
-  }
-}
 @keyframes l19-2 {
-  0%, 49.9% {
+  0%,
+49.9% {
     background-position: 0 0, 0 0, 100% 100%, 100% 100%;
   }
-  50%, 100% {
+  50%,
+100% {
     background-position: 100% 0, 0 100%, 0 100%, 100% 0;
   }
-}/*# sourceMappingURL=general.css.map */
+}

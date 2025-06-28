@@ -1,6 +1,6 @@
 {
     "name": "Xlpanel",
-    "version": "1.0",
+    "version": "1.0.1",
     "codename": "novaya veshsh",
     "pterodactyl": {
         "host": "your_pterodactyl_host",
@@ -23,6 +23,11 @@
         },
         "verifyUser": false,
         "_smtpComment": "required!"
+    },
+    "cf_turnstile": {
+        "enable": false,
+        "site_key": "",
+        "secret_key":""
     },
     "database": "xlpanel.db",
     "db_comment": "Only support sqlite, please provide a file name, not link!",

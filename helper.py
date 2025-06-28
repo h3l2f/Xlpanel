@@ -357,3 +357,15 @@ def editPteroServer(user, identifier, cpu, ram, disk):
 			if (resp.get("errors")): return (False, resp["errors"][0])
 			return (True, resp)
 	return (False,"You don't have permission to modify this server.")
+
+cf_secret_token = config["cf_turnstile"]["secret_key"]
+
+def cf_check(token, ip):
+	data = {
+		"secret": cf_secret_token,
+		"response": token,
+		"remote_ip": ip
+	}
+	if not config["cf_turnstile"]["enable"]: return (True,)
+	e = requests.post("https://challenges.cloudflare.com/turnstile/v0/siteverify", json=data)
+	return (e.json().get("success"), ) #pyright: ignore

@@ -2,19 +2,19 @@ main {
   padding: 20px;
   opacity: 0;
 }
+
 main .title * {
   font-weight: 100;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
 }
+
 main .items {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 main .items .it {
   padding: 20px;
   margin-top: 20px;
@@ -26,6 +26,7 @@ main .items .it {
   width: 100%;
   max-width: 200px;
 }
+
 main .items .it select {
   width: 100%;
   margin-top: 10px;
@@ -36,13 +37,16 @@ main .items .it select {
   border-radius: 10px;
   border: solid 1px rgba(0, 0, 170, 0.45);
 }
+
 main .items .it select:focus {
   border-color: #0000aa;
   outline: none;
 }
+
 main .items .it select * {
   background-color: #0000dd;
 }
+
 main .items .it button {
   width: 100%;
   margin-top: 10px;
@@ -54,23 +58,24 @@ main .items .it button {
   border: solid 1px rgba(0, 0, 170, 0.5);
   cursor: pointer;
 }
+
 main .items .it button:hover {
   border-color: #0000aa;
 }
+
 main .items .it button:active {
   background-color: #0000aa;
 }
+
 main .items .it button:disabled {
   border: solid 1px rgba(0, 0, 170, 0.1);
   background-color: transparent;
   color: rgba(255, 255, 255, 0.4);
   cursor: default;
 }
+
 main :where(.err, .done) {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   margin-top: 20px;
   padding: 20px;
   color: white;
@@ -79,13 +84,15 @@ main :where(.err, .done) {
   border-radius: 16px;
   border: 1px solid rgba(170, 0, 0, 0.3);
 }
+
 main :where(.err, .done) * {
   font-weight: 100;
 }
+
 main .done {
   color: white;
   background: rgba(0, 170, 0, 0.2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   border: 1px solid rgba(0, 170, 0, 0.3);
-}/*# sourceMappingURL=store.css.map */
+}

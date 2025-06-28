@@ -24,7 +24,7 @@ body {
 .nav {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 65px;
   max-width: 200px;
   min-width: 65px;
   height: 100%;
@@ -52,6 +52,7 @@ body {
   margin-top: 30px;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   padding-bottom: 30px;
 }
 .nav .items a {
@@ -65,6 +66,14 @@ body {
   border-radius: 10px;
   transition: 0.2s;
   border: solid 1px transparent;
+  display: flex;
+  gap: 5px;
+}
+.nav .items a .it .icon {
+  width: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nav .items a:hover .it {
   border: solid 1px #0000aa;
@@ -82,6 +91,10 @@ body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 170, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: clip;
 }
 .nav .users * {
   font-weight: 100;
@@ -90,8 +103,47 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.nav .users .one {
+  max-width: 75%;
+}
+.nav .users .two {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.nav .users .two button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: 0.3s;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 5px;
+  border: solid 1px rgba(170, 0, 0, 0.5);
+  cursor: pointer;
+  padding: 5px;
+}
+.nav .users .two button:hover {
+  border-color: #aa0000;
+}
+.nav .users .two button:active {
+  background-color: #aa0000;
+}
+.nav .users .two button:disabled {
+  border: solid 1px rgba(170, 0, 0, 0.1);
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: default;
+}
+.nav .users .two button svg path {
+  fill: #5e0000;
+}
 .nav #menuToggle {
   background-color: rgba(0, 0, 170, 0.15);
+  display: none;
 }
 .nav .items .sp .it {
   background-color: #000077 !important;
@@ -109,7 +161,6 @@ body {
   margin: auto;
 }
 .main footer {
-  height: 50px;
   width: 100%;
   color: white;
   background: rgba(0, 0, 170, 0.05);
@@ -120,15 +171,30 @@ body {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 .main footer .text {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 5px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.main footer .text h5 {
+  word-break: break-word;
+}
+.main footer .text h6 {
+  display: flex;
+  gap: 5px;
 }
 .main footer .text * {
   font-weight: 100;
@@ -141,9 +207,22 @@ main {
   overflow-x: auto;
 }
 
+@media only screen and (min-width: 601px) {
+  .nav {
+    width: 100% !important;
+  }
+  .nav .name {
+    display: block !important;
+  }
+  .nav .items .it it {
+    display: flex !important;
+  }
+  .nav .users {
+    display: flex !important;
+  }
+}
 @media only screen and (max-width: 600px) {
   .nav {
-    width: 55px;
     position: fixed;
     z-index: 2;
     height: 100%;
@@ -168,7 +247,7 @@ main {
     margin-top: 10px;
     padding-bottom: 30px;
   }
-  .nav .items .it {
-    text-align: center;
+  #menuToggle {
+    display: flex !important;
   }
 }/*# sourceMappingURL=dash_css.css.map */
