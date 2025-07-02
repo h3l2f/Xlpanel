@@ -106,6 +106,13 @@
         "coinPerStage": 10,
         "stageTime": 60
     },
+    "captcha": {
+        "enable": true,
+        "coinPerSolve": 2,
+        "captchaLength": 10,
+        "limitPerMinute": 5,
+        "_limitPerMinute_aka": "rare-limit"
+    },
     "store": {
         "enable": true,
         "cpu": [100, 100],

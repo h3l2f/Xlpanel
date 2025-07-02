@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- I hate this shit, trust me:> -->
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/css/general.css">
+    <link rel="stylesheet" href="/assets/css/dash_css.css">
+    <link rel="stylesheet" href="/assets/css/captcha.css">
+    <link rel="shortcut icon" href="/assets/img/logo.png" type="image/png">
+    <script>
+        document.onreadystatechange = function() {
+            if (document.readyState == 'complete') {
+                $(".loading").fadeOut(200)
+                $("body").css("overflow-y","unset")
+                $("main").delay(300).css("animation", "showing 0.5s forwards ease-in-out");
+                document.onreadystatechange = () => {}
+            }
+        };
+    </script>
+    <script src="/assets/js/account.js"></script>
+    <script src="/assets/js/dash.js"></script>
+    <script src="/assets/js/signF.js"></script>
+    <title>Captcha4Coin - {{name}}</title>
+</head>
+<body>
+    <div class="loading">
+        <div class="loader"></div>
+    </div>
+    <div class="nav">
+        <div class="name">
+            {{name}}
+        </div>
+        <div class="items">
+            <a onclick="sh()">
+                <div id="menuToggle" class="it">
+                    <div class="icon">
+                        <i class="fa-solid fa-bars"></i>
+                    </div>
+                    <it>Hide menu</it>
+                </div>
+            </a>
+            {% for i in list(mIt.keys()) %}
+            <a href="{{mIt[i]['link']}}" {% if request.path.replace('/','') == mIt[i]['link'].replace('/','') %} class="sp" {% endif %}>
+                <div class="it">
+                    <div class="icon">
+                        {{mIt[i]["icon"] | safe}}
+                    </div>
+                    <it>{{i}}</it>
+                </div>
+            </a>
+            {% endfor %}
+            <a href="/panel" target="_blank">
+                <div class="it">
+                    <div class="icon">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                    <it>Panel</it>
+                </div>
+            </a>
+            {% if isAdmin %}
+            <a href="/admin">
+                <div class="it">
+                    <div class="icon">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <it>Admin Panel</it>
+                </div>
+            </a>
+            {% endif %}
+        </div>
+        <div class="users">
+            <div class="one">
+            <h5>{{user}}</h5>
+            <h6>Coins: {{coin}}</h6>
+            </div>
+            <div class="two">
+                <button onclick="window.location='/logout'">
+                    <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
+                        viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M9 12a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1Z" class=""></path>
+                        <path fill="currentColor" fill-rule="evenodd"
+                            d="M2.75 3.02A3 3 0 0 1 5 2h10a3 3 0 0 1 3 3v7.64c0 .44-.55.7-.95.55a3 3 0 0 0-3.17 4.93l.02.03a.5.5 0 0 1-.35.85h-.05a.5.5 0 0 0-.5.5 2.5 2.5 0 0 1-3.68 2.2l-5.8-3.09A3 3 0 0 1 2 16V5a3 3 0 0 1 .76-1.98Zm1.3 1.95A.04.04 0 0 0 4 5v11c0 .36.2.68.49.86l5.77 3.08a.5.5 0 0 0 .74-.44V8.02a.5.5 0 0 0-.32-.46l-6.63-2.6Z"
+                            clip-rule="evenodd" class=""></path>
+                        <path fill="currentColor"
+                            d="M15.3 16.7a1 1 0 0 1 1.4-1.4l4.3 4.29V16a1 1 0 1 1 2 0v6a1 1 0 0 1-1 1h-6a1 1 0 1 1 0-2h3.59l-4.3-4.3Z"
+                            class=""></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <main>
+            <div class="title">
+                <h2>Captcha4Coin</h2>
+                <h4>Solve captcha to get coin!</h4>
+            </div>
+            <div class="mainArea">
+                <h4>Captcha length: {{captLen}}</h4>
+                <h4>Coin you will receive: {{captRec}} coin(s)</h4>
+                <h4>Total received: <e id="trcv">0</e> coin(s)</h4>
+                <div class="box">
+                    <div class="done">
+                        <h4>Correct! Received {{captRec}} coin(s).</h4>
+                    </div>
+                    <div class="err">
+                        <h4></h4>
+                    </div>
+                    <div class="img">
+                        <img id="captcha" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMzAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik02NC4zODUgNDEuNjY1aC0xLjQ2djE2LjExaDEuNDZxLjMxIDAgLjUuMi4xOS4xOS4xOS40N3YxLjAxaC00LjMxdi0xOS40N2g0LjMxdjEuMDFxMCAuMjgtLjE5LjQ3LS4xOS4yLS41LjJtNi40NSA4LjkxcS40OCAwIC44NC0uMTN0LjU5LS4zNnEuMjQtLjIzLjM2LS41Ni4xMi0uMzIuMTItLjcxIDAtLjgtLjQ4LTEuMjctLjQ3LS40Ny0xLjQzLS40N3QtMS40My40N3EtLjQ4LjQ3LS40OCAxLjI3IDAgLjM3LjEyLjd0LjM2LjU2cS4yMy4yNC42LjM3LjM2LjEzLjgzLjEzbTIuOTMgNi4xM3EwLS4zMS0uMTktLjUxdC0uNTEtLjMxcS0uMzMtLjExLS43Ny0uMTYtLjQzLS4wNi0uOTItLjA4LS40OS0uMDMtMS4wMS0uMDV0LTEuMDEtLjA4cS0uNDMuMjQtLjcuNTYtLjI3LjMzLS4yNy43NiAwIC4yOC4xNS41My4xNC4yNS40NS40Mi4zMS4xOC44LjI4dDEuMjEuMSAxLjI1LS4xMXEuNTItLjExLjg2LS4zLjM0LS4yLjUtLjQ2LjE2LS4yNy4xNi0uNTltLS41MS0xMC44OWgzLjA5di45N3EwIC40Ni0uNTUuNTdsLS45Ny4xOHEuMjIuNTUuMjIgMS4yMSAwIC44LS4zMiAxLjQ1LS4zMi42NC0uODkgMS4wOS0uNTYuNDYtMS4zNC43LS43Ny4yNS0xLjY2LjI1LS4zMSAwLS42MS0uMDMtLjI5LS4wMy0uNTgtLjA5LS41LjMxLS41LjY5IDAgLjMyLjMuNDcuMy4xNi43OS4yMi41LjA2IDEuMTMuMDguNjMuMDEgMS4yOS4wNy42Ni4wNSAxLjI5LjE4dDEuMTIuNDJxLjUuMjguNzkuNzcuMy40OS4zIDEuMjUgMCAuNzItLjM1IDEuMzl0LTEuMDIgMS4ycS0uNjYuNTItMS42My44NC0uOTguMzItMi4yMS4zMi0xLjIyIDAtMi4xMy0uMjQtLjktLjIzLTEuNS0uNjMtLjYtLjM5LS44OS0uOS0uMjktLjUyLS4yOS0xLjA3IDAtLjc2LjQ1LTEuMjcuNDYtLjUxIDEuMjYtLjgxLS40My0uMjItLjY4LS41OS0uMjYtLjM3LS4yNi0uOTcgMC0uMjQuMDktLjUuMDktLjI1LjI2LS41MS4xOC0uMjUuNDQtLjQ3LjI2LS4yMy42Mi0uNDEtLjgyLS40NC0xLjI5LTEuMTctLjQ2LS43NC0uNDYtMS43MyAwLS43OS4zMi0xLjQ0dC44OS0xLjFxLjU3LS40NiAxLjM1LS43Ljc5LS4yNCAxLjcxLS4yNC42OSAwIDEuMy4xNHQxLjEyLjQxbTYuNzggMy43OGg0Ljg5cTAtLjUtLjE0LS45NS0uMTQtLjQ0LS40My0uNzgtLjI4LS4zMy0uNzItLjUzLS40My0uMTktMS4wMS0uMTktMS4xMiAwLTEuNzcuNjQtLjY0LjY0LS44MiAxLjgxbTYuNjEgMS41N2gtNi42NnEuMDYuODMuMjkgMS40My4yMy42MS42MSAxdC45LjU5cS41Mi4xOSAxLjE1LjE5dDEuMDgtLjE1cS40Ni0uMTQuOC0uMzJ0LjYtLjMzcS4yNi0uMTQuNS0uMTQuMzIgMCAuNDguMjRsLjc1Ljk0cS0uNDMuNTEtLjk3Ljg1LS41My4zNC0xLjEyLjU0LS41OC4yMS0xLjE4LjI5LS42MS4wOS0xLjE3LjA5LTEuMTMgMC0yLjA5LS4zOC0uOTctLjM3LTEuNjgtMS4xLS43Mi0uNzMtMS4xMy0xLjgtLjQxLTEuMDgtLjQxLTIuNSAwLTEuMS4zNi0yLjA3dDEuMDItMS42OXEuNjctLjcyIDEuNjMtMS4xNHQyLjE3LS40MnExLjAyIDAgMS44OC4zMi44Ni4zMyAxLjQ4Ljk1LjYyLjYzLjk3IDEuNTR0LjM1IDIuMDdxMCAuNTktLjEyLjc5LS4xMy4yMS0uNDkuMjFtNC44LTUuMjQuMTguODVxLjMzLS4zMy42OS0uNi4zNi0uMjguNzYtLjQ4LjQxLS4xOS44Ny0uM3QxLjAxLS4xMXEuODggMCAxLjU2LjMuNjkuMyAxLjE0Ljg0LjQ2LjU0LjcgMS4yOS4yMy43NS4yMyAxLjY1djYuODZoLTIuNTl2LTYuODZxMC0uOTgtLjQ1LTEuNTItLjQ1LS41NS0xLjM4LS41NS0uNjcgMC0xLjI2LjMxLS41OS4zLTEuMTEuODN2Ny43OWgtMi42di0xMC43N2gxLjU5cS41IDAgLjY2LjQ3bTExLjY1IDMuNjdoNC44OXEwLS41LS4xNC0uOTUtLjE0LS40NC0uNDMtLjc4LS4yOC0uMzMtLjcyLS41My0uNDMtLjE5LTEuMDEtLjE5LTEuMTIgMC0xLjc3LjY0dC0uODIgMS44MW02LjYxIDEuNTdoLTYuNjdxLjA3LjgzLjMgMS40My4yMy42MS42MSAxIC4zNy4zOS44OS41OS41Mi4xOSAxLjE1LjE5dDEuMDktLjE1cS40Ni0uMTQuOC0uMzJ0LjYtLjMzcS4yNS0uMTQuNS0uMTQuMzIgMCAuNDguMjRsLjc0Ljk0cS0uNDMuNTEtLjk2Ljg1LS41NC4zNC0xLjEyLjU0LS41OC4yMS0xLjE5LjI5LS42LjA5LTEuMTcuMDktMS4xMiAwLTIuMDktLjM4LS45Ni0uMzctMS42OC0xLjEtLjcxLS43My0xLjEyLTEuOC0uNDEtMS4wOC0uNDEtMi41IDAtMS4xLjM2LTIuMDcuMzUtLjk3IDEuMDItMS42OXQxLjYzLTEuMTQgMi4xNy0uNDJxMS4wMiAwIDEuODguMzIuODYuMzMgMS40OC45NS42Mi42My45NyAxLjU0dC4zNSAyLjA3cTAgLjU5LS4xMy43OS0uMTIuMjEtLjQ4LjIxbTQuODQtNS4wNi4xNiAxLjIycS41LS45NyAxLjItMS41Mi42OS0uNTUgMS42My0uNTUuNzUgMCAxLjIuMzJsLS4xNyAxLjk1cS0uMDUuMTgtLjE1LjI2dC0uMjcuMDhxLS4xNSAwLS40Ni0uMDV0LS42MS0uMDVxLS40MyAwLS43Ni4xMi0uMzQuMTMtLjYxLjM3LS4yNy4yMy0uNDcuNTctLjIxLjMzLS4zOC43NnY2LjY0aC0yLjZ2LTEwLjc3aDEuNTNxLjM5IDAgLjU1LjE0dC4yMS41MW0xMS4yNCA3LjM0di0xLjgycS0xLjEzLjA1LTEuODkuMi0uNzcuMTQtMS4yMy4zNnQtLjY2LjUxcS0uMi4zLS4yLjY0IDAgLjY4LjQuOTguNDEuMjkgMS4wNi4yOS43OSAwIDEuMzgtLjI5LjU4LS4yOCAxLjE0LS44N20tNS40OC01LjY2LS40Ny0uODNxMS44Ni0xLjcgNC40OC0xLjcuOTQgMCAxLjY5LjMxLjc0LjMxIDEuMjYuODYuNTEuNTUuNzggMS4zMi4yNy43Ni4yNyAxLjY4djYuOGgtMS4xOHEtLjM3IDAtLjU3LS4xMXQtLjMxLS40NWwtLjIzLS43N3EtLjQxLjM2LS44LjY0dC0uODEuNDctLjkuMjlxLS40Ny4xLTEuMDUuMS0uNjggMC0xLjI2LS4xOS0uNTgtLjE4LTEtLjU1LS40Mi0uMzYtLjY1LS45MXQtLjIzLTEuMjdxMC0uNDEuMTQtLjgxLjEzLS40MS40NC0uNzguMzEtLjM2LjgxLS42OS40OS0uMzMgMS4yMS0uNTd0MS42Ny0uMzlxLjk2LS4xNSAyLjE5LS4xOHYtLjYzcTAtMS4wOS0uNDctMS42MS0uNDYtLjUyLTEuMzMtLjUyLS42MyAwLTEuMDQuMTUtLjQyLjE1LS43My4zMy0uMzIuMTktLjU4LjMzLS4yNS4xNS0uNTcuMTUtLjI3IDAtLjQ2LS4xNHQtLjMtLjMzbTE0LjAzIDguNjFxLTEuNCAwLTIuMTUtLjc5LS43NS0uOC0uNzUtMi4xOXYtNi4wMmgtMS4xMXEtLjIxIDAtLjM1LS4xNC0uMTUtLjEzLS4xNS0uNDF2LTEuMDNsMS43My0uMjguNTUtMi45NHEuMDUtLjIxLjItLjMyLjE0LS4xMi4zOC0uMTJoMS4zNHYzLjM5aDIuODh2MS44NWgtMi44OHY1Ljg0cTAgLjUuMjUuNzguMjQuMjkuNjcuMjkuMjQgMCAuNDEtLjA2LjE2LS4wNi4yOC0uMTJ0LjIyLS4xMnEuMDktLjA2LjE5LS4wNi4xMSAwIC4xOC4wNi4wOC4wNi4xNi4xN2wuNzggMS4yNnEtLjU3LjQ3LTEuMy43Mi0uNzQuMjQtMS41My4yNG02LjI3LTYuOGg0LjlxMC0uNS0uMTUtLjk1LS4xNC0uNDQtLjQyLS43OC0uMjgtLjMzLS43Mi0uNTMtLjQ0LS4xOS0xLjAxLS4xOS0xLjEzIDAtMS43Ny42NC0uNjUuNjQtLjgzIDEuODFtNi42MiAxLjU3aC02LjY3cS4wNi44My4yOSAxLjQzLjI0LjYxLjYxIDEgLjM4LjM5LjkuNTkuNTIuMTkgMS4xNS4xOXQxLjA5LS4xNXEuNDUtLjE0LjgtLjMyLjM0LS4xOC41OS0uMzMuMjYtLjE0LjUtLjE0LjMzIDAgLjQ5LjI0bC43NC45NHEtLjQzLjUxLS45Ni44NS0uNTQuMzQtMS4xMi41NC0uNTkuMjEtMS4xOS4yOS0uNi4wOS0xLjE3LjA5LTEuMTIgMC0yLjA5LS4zOC0uOTctLjM3LTEuNjgtMS4xdC0xLjEyLTEuOHEtLjQxLTEuMDgtLjQxLTIuNSAwLTEuMS4zNS0yLjA3LjM2LS45NyAxLjAzLTEuNjkuNjYtLjcyIDEuNjMtMS4xNC45Ni0uNDIgMi4xNi0uNDIgMS4wMiAwIDEuODguMzIuODYuMzMgMS40OC45NS42Mi42My45NyAxLjU0LjM2LjkxLjM2IDIuMDcgMCAuNTktLjEzLjc5LS4xMy4yMS0uNDguMjFtNi4xMi0xMS4xOHYxOS40N2gtNC4zMXYtMS4wMXEwLS4yOC4xOS0uNDcuMTktLjIuNS0uMmgxLjQ2di0xNi4xMWgtMS40NnEtLjMxIDAtLjUtLjItLjE5LS4xOS0uMTktLjQ3di0xLjAxem0xMS43MSAxNi40MXEtMS40MSAwLTIuMTYtLjc5LS43NS0uOC0uNzUtMi4xOXYtNi4wMmgtMS4xcS0uMjEgMC0uMzYtLjE0LS4xNS0uMTMtLjE1LS40MXYtMS4wM2wxLjczLS4yOC41NS0yLjk0cS4wNS0uMjEuMi0uMzIuMTUtLjEyLjM4LS4xMmgxLjM0djMuMzloMi44OHYxLjg1aC0yLjg4djUuODRxMCAuNS4yNS43OC4yNS4yOS42OC4yOS4yNCAwIC40LS4wNnQuMjgtLjEyLjIyLS4xMnEuMDktLjA2LjE5LS4wNi4xMSAwIC4xOS4wNi4wNy4wNi4xNS4xN2wuNzggMS4yNnEtLjU3LjQ3LTEuMy43Mi0uNzQuMjQtMS41Mi4yNG04Ljk4LTExLjExcTEuMiAwIDIuMTguMzkuOTkuMzkgMS42OCAxLjEuNy43MSAxLjA4IDEuNzR0LjM4IDIuM3EwIDEuMjgtLjM4IDIuMzF0LTEuMDggMS43NnEtLjY5LjcyLTEuNjggMS4xMS0uOTguMzktMi4xOC4zOXQtMi4xOS0uMzktMS42OS0xLjExcS0uNjktLjczLTEuMDgtMS43Ni0uMzgtMS4wMy0uMzgtMi4zMSAwLTEuMjcuMzgtMi4zLjM5LTEuMDMgMS4wOC0xLjc0LjctLjcxIDEuNjktMS4xdDIuMTktLjM5bTAgOS4xcTEuMzUgMCAxLjk5LS45LjY1LS45LjY1LTIuNjUgMC0xLjc0LS42NS0yLjY1LS42NC0uOTItMS45OS0uOTItMS4zNiAwLTIuMDIuOTItLjY1LjkyLS42NSAyLjY1IDAgMS43NC42NSAyLjY0LjY2LjkxIDIuMDIuOTFtMTkuNTctNy43Ny0uNTkuOTRxLS4xMS4xNi0uMjIuMjMtLjEyLjA3LS4zLjA3LS4xOSAwLS40LS4xLS4yMi0uMTEtLjUtLjI0dC0uNjUtLjI0cS0uMzYtLjEtLjg1LS4xLS43NyAwLTEuMi4zMi0uNDQuMzMtLjQ0Ljg1IDAgLjM1LjIzLjU5LjIyLjIzLjYuNDEuMzcuMTguODQuMzJ0Ljk2LjMxLjk2LjM5cS40Ny4yMS44NS41NC4zNy4zMy42Ljc5LjIyLjQ3LjIyIDEuMTIgMCAuNzctLjI4IDEuNDMtLjI3LjY2LS44MiAxLjEzLS41NS40OC0xLjM1Ljc1dC0xLjg1LjI3cS0uNTYgMC0xLjA5LS4xdC0xLjAyLS4yOC0uOS0uNDJxLS40Mi0uMjQtLjczLS41M2wuNi0uOThxLjExLS4xOC4yNy0uMjguMTYtLjA5LjQtLjA5dC40Ni4xNHEuMjEuMTMuNDkuMjkuMjkuMTYuNjcuMjkuMzguMTQuOTcuMTQuNDYgMCAuOC0uMTEuMzMtLjExLjU0LS4yOS4yMi0uMTguMzItLjQxLjEtLjI0LjEtLjQ5IDAtLjM4LS4yMy0uNjJ0LS42LS40Mi0uODUtLjMyLS45OC0uMzFxLS40OS0uMTctLjk3LS4zOS0uNDgtLjIzLS44NS0uNTgtLjM3LS4zNC0uNi0uODUtLjIzLS41LS4yMy0xLjIxIDAtLjY3LjI3LTEuMjYuMjYtLjYuNzctMS4wNXQxLjI3LS43MXEuNzYtLjI3IDEuNzYtLjI3IDEuMTEgMCAyLjAyLjM3LjkyLjM2IDEuNTMuOTZtNC42Ni01Ljk5djUuOThxLjYzLS41OSAxLjM4LS45NS43Ni0uMzcgMS43OC0uMzcuODggMCAxLjU2LjMuNjkuMyAxLjE0Ljg0LjQ2LjU0LjcgMS4yOS4yMy43NS4yMyAxLjY1djYuODZoLTIuNTl2LTYuODZxMC0uOTgtLjQ1LTEuNTItLjQ1LS41NS0xLjM4LS41NS0uNjcgMC0xLjI2LjMxLS41OS4zLTEuMTEuODN2Ny43OWgtMi42di0xNS42em0xNC4wMiA0LjY2cTEuMTkgMCAyLjE3LjM5Ljk5LjM5IDEuNjggMS4xLjcuNzEgMS4wOCAxLjc0dC4zOCAyLjNxMCAxLjI4LS4zOCAyLjMxdC0xLjA4IDEuNzZxLS42OS43Mi0xLjY4IDEuMTEtLjk4LjM5LTIuMTcuMzktMS4yMSAwLTIuMi0uMzl0LTEuNjgtMS4xMXEtLjctLjczLTEuMDktMS43Ni0uMzgtMS4wMy0uMzgtMi4zMSAwLTEuMjcuMzgtMi4zLjM5LTEuMDMgMS4wOS0xLjc0LjY5LS43MSAxLjY4LTEuMXQyLjItLjM5bTAgOS4xcTEuMzQgMCAxLjk5LS45LjY0LS45LjY0LTIuNjUgMC0xLjc0LS42NC0yLjY1LS42NS0uOTItMS45OS0uOTItMS4zNyAwLTIuMDMuOTItLjY1LjkyLS42NSAyLjY1IDAgMS43NC42NSAyLjY0LjY2LjkxIDIuMDMuOTFtMjAuNy04LjkzaDEuOThsLTMuNDMgMTAuNzdoLTIuMDhxLS4zNSAwLS40OS0uNDZsLTEuOTMtNi4yM3EtLjEtLjMxLS4xOC0uNjItLjA3LS4zMS0uMTMtLjYzLS4wNi4zMi0uMTQuNjR0LS4xNy42M2wtMS45NiA2LjIxcS0uMTMuNDYtLjU2LjQ2aC0ybC0zLjQxLTEwLjc3aDIuMDdxLjI4IDAgLjQ4LjEzLjIuMTQuMjcuMzVsMS41NCA1Ljc1cS4xMS40OC4yLjkzdC4xNi45cS4xMS0uNDUuMjQtLjl0LjI4LS45M2wxLjc5LTUuNzdxLjA2LS4yMS4yNC0uMzUuMTktLjEzLjQ1LS4xM2gxLjE0cS4yOCAwIC40Ny4xMy4xOS4xNC4yNi4zNWwxLjczIDUuNzdxLjE0LjQ4LjI2LjkzLjEyLjQ2LjIzLjkxLjE0LS44OS4zOS0xLjg0bDEuNTktNS43NXEuMDctLjIxLjI2LS4zNS4xOS0uMTMuNDUtLjEzbTMuMDcgOS4zNHEwLS4zMi4xMi0uNjIuMTItLjI5LjMzLS41dC41LS4zNHEuMy0uMTIuNjMtLjEyLjM0IDAgLjYzLjEyLjI5LjEzLjUuMzQuMjIuMjEuMzQuNS4xMy4zLjEzLjYyIDAgLjM0LS4xMy42My0uMTIuMjktLjM0LjUtLjIxLjIxLS41LjMzdC0uNjMuMTJxLS4zMyAwLS42My0uMTItLjI5LS4xMi0uNS0uMzN0LS4zMy0uNS0uMTItLjYzIi8+PC9zdmc+">
+                    </div>
+                    <div class="first">
+                        <button onclick="genCaptcha()" class="genBtn">Generate</button>
+                    </div>
+                    <div class="answer">
+                        <h5>What does that say?</h5>
+                        <input type="text" id="captchaAns" placeholder="Enter your answer">
+                        <div class="action">
+                            <button onclick="solve()" class="genBtn">Submit</button>
+                            <button onclick="genCaptcha()" class="genBtn">Regenerate</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    logMeme = ""
+                    trcv=0
+                    function genCaptcha(d=0, mmb=0) {
+                        g = "data:image/png;base64,"
+                        e = $("#captcha")
+                        $(".genBtn").attr("disabled", "")
+                        fetch("/captGen/", {
+                            headers: {
+                                "accept": "application/json"
+                            }
+                        })
+                        .then(r => {
+                            logMeme = r.headers.get("cf-connect-token") ? r.headers.get("cf-connect-token") : ""
+                            return r.json()
+                        })
+                        .then(r => {
+                            $("#captchaAns").val("")
+                            if (r.status == "error") {
+                                if (!mmb) $(".done").css("display", "none")
+                                $(".answer").css("display", "none")
+                                $(".first").css("display", "flex")
+                                $(".err").css("display", "block")
+                                $(".img").css("display", "none")
+                                $(".err h4").html(r.description)
+                                $(".genBtn").removeAttr("disabled")
+                                return
+                            }
+                            if (!d) $(".err").css("display", "none")
+                            $(".img").css("display", "flex")
+                            e.attr("src", g+r.image)
+                            $(".answer").css("display", "flex")
+                            $(".first").css("display", "none")
+                            $(".genBtn").removeAttr("disabled")
+                        })
+                        .catch(err => {
+                            $(".genBtn").removeAttr("disabled")
+                        })
+                    }
+
+                    function solve() {
+                        inputString = $("#captchaAns").val()+" "+logMeme
+                        const encodingMap = {
+                            "000000": "A",
+                            "000001": "B",
+                            "000010": "C",
+                            "000011": "D",
+                            "000100": "E",
+                            "000101": "F",
+                            "000110": "G",
+                            "000111": "H",
+                            "001000": "I",
+                            "001001": "J",
+                            "001010": "K",
+                            "001011": "L",
+                            "001100": "M",
+                            "001101": "N",
+                            "001110": "O",
+                            "001111": "P",
+                            "010000": "Q",
+                            "010001": "R",
+                            "010010": "S",
+                            "010011": "T",
+                            "010100": "U",
+                            "010101": "V",
+                            "010110": "W",
+                            "010111": "X",
+                            "011000": "Y",
+                            "011001": "Z",
+                            "011010": "a",
+                            "011011": "b",
+                            "011100": "c",
+                            "011101": "d",
+                            "011110": "e",
+                            "011111": "f",
+                            "100000": "g",
+                            "100001": "h",
+                            "100010": "i",
+                            "100011": "j",
+                            "100100": "k",
+                            "100101": "l",
+                            "100110": "m",
+                            "100111": "n",
+                            "101000": "o",
+                            "101001": "p",
+                            "101010": "q",
+                            "101011": "r",
+                            "101100": "s",
+                            "101101": "t",
+                            "101110": "u",
+                            "101111": "v",
+                            "110000": "w",
+                            "110001": "x",
+                            "110010": "y",
+                            "110011": "z",
+                            "110100": "0",
+                            "110101": "1",
+                            "110110": "2",
+                            "110111": "3",
+                            "111000": "4",
+                            "111001": "5",
+                            "111010": "6",
+                            "111011": "7",
+                            "111100": "8",
+                            "111101": "9",
+                            "111110": "+",
+                            "111111": "/"
+                        };
+                        
+                        let binaryString = "";
+                        const binaryList = [];
+                        
+                        for (let char of inputString) {
+                            const binaryChar = char.charCodeAt(0).toString(2).padStart(8, '0');
+                            if (binaryChar.length > 8) {
+                                return alert("The string to be encoded contains characters outside of the Latin1 range.");
+                            }
+                            binaryList.push(binaryChar);
+                        }
+                        
+                        binaryString = binaryList.join('');
+                        const chunkedBinaryList = [];
+                        
+                        for (let i = 1; i <= Math.floor(binaryString.length / 6); i++) {
+                            chunkedBinaryList.push(binaryString.slice((i * 6) - 6, i * 6));
+                        }
+                        
+                        if (binaryString.length % 6 !== 0) {
+                            chunkedBinaryList.push(binaryString.slice(Math.floor(binaryString.length / 6) * 6).padEnd(6, '0'));
+                        }
+                        
+                        const encodedList = chunkedBinaryList.map(chunk => encodingMap[chunk]);
+                        for (let index = 0; index < Math.floor(encodedList.length / 2) * 2; index++) {
+                            if (index % 2 !== 0) continue;
+                            [encodedList[index], encodedList[index + 1]] = [encodedList[index + 1], encodedList[index]];
+                        }
+                        
+                        val = encodedList.join('');
+
+                        if (!$("#captchaAns").val()) {
+                            $(".done").css("display", "none")
+                                $(".err").css("display", "block")
+                                $(".err h4").html("Please enter your answer.")
+                                $(".genBtn").removeAttr("disabled")
+                                return
+                        }
+
+                        fetch("/captSol/?val="+val, {
+                            headers: {
+                                "accept": "application/json"
+                            }
+                        })
+                        .then(r => r.json())
+                        .then(r => {
+                            if (r.status == "error") {
+                                $(".done").css("display", "none")
+                                $(".err").css("display", "block")
+                                $(".err h4").html(r.message)
+                                genCaptcha(d=1)
+                                $(".genBtn").removeAttr("disabled")
+                                return
+                            }
+                            $(".err").css("display", "none")
+                            $(".done").css("display", "block")
+                            $("#trcv").html(trcv+r.rcv)
+                            trcv+=r.rcv
+                            genCaptcha(d=1, mmb=1)
+                            $(".genBtn").removeAttr("disabled")
+                        })
+                        .catch(err => {
+                            $(".genBtn").removeAttr("disabled")
+                        })
+                    }
+                </script>
+            </div>
+        </main>
+        <footer>
+            <div class="text">
+                <h6>
+                    <div class="icon">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    {{loadTime}}s
+                </h6>
+                <h5>Copyright © 2024-{{datetime.datetime.now().strftime("%Y")}} <a
+                        href="https://github.com/h3l2f/xlpanel">Xlpanel</a>.</h5>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

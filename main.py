@@ -5,6 +5,9 @@ from werkzeug.exceptions import HTTPException
 import helper
 import datetime
 import sendmail
+from flask import Flask, jsonify
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__, template_folder="templates", static_folder="assets")
 sock = Sock(app)
@@ -20,6 +23,11 @@ app.config['SOCK_SERVER_OPTIONS'] = {'ping_interval': 2}
 
 with open("config.json","r", encoding="utf-8") as f:
     config = json.load(f)
+
+limiter = Limiter(
+    app=app,
+    key_func=get_remote_address
+)
 
 # general
 name = config["name"]
@@ -62,6 +70,10 @@ menuItems = {
         "link": "/afk",
         "icon": """<i class="fa-solid fa-bullseye"></i>"""
     },
+    "Captcha": {
+        "link": "/captcha",
+        "icon": """<i class="fa-solid fa-robot"></i>"""
+    },
     "Account": {
         "link": "/account",
         "icon": """<i class="fa-solid fa-user"></i>"""
@@ -80,6 +92,9 @@ if not afk["enable"]:
 if not store["enable"]:
     routeFile.remove("store.py")
     menuItems.pop("Store")
+if not config["captcha"]["enable"]:
+    routeFile.remove("captchaForCoin.py")
+    menuItems.pop("Captcha")
 if not config["mail"]["verifyUser"]:
     routeFile.remove("verify.py")
 for i in routeFile:

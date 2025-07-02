@@ -1,7 +1,9 @@
-flask
-flask-sock
-flask-cors
+flask==3.1.0
+flask-sock==0.7.0
+flask-cors==5.0.0
 bcrypt==4.1.1
-dnspython
-requests
-libsass
+dnspython==2.7.0
+requests==2.32.3
+libsass==0.23.0
+captcha==0.7.1
+Flask-Limiter==3.12

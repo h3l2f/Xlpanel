@@ -1,0 +1,105 @@
+@import "data";
+
+// .loading {display: none;}
+
+main {
+	padding: 20px;
+	opacity: 0;
+
+	.title * {
+		font-weight: 100;
+		user-select: none;
+	}
+
+	.info {
+		user-select: none;
+		padding: 16px;
+		margin: 20px auto;
+		width: 100%;
+		max-width: 750px;
+		@include glass(transparentize($pcolor, 0.1));
+	}
+
+	.mainArea {
+		user-select: none;
+		margin-top: 20px;
+		padding: 20px;
+		@include glass(transparentize($pcolor, 0.1));
+		display: flex;
+		flex-direction: column;
+
+		.box {
+			margin-top: 10px;
+			padding: 20px;
+			@include glass(transparentize($pcolor, 0.1));
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+
+			:where(.err, .done) {
+				padding: 10px;
+				display: none;
+			}
+
+			.err {
+				@include glass(#aa0000, 10px);
+			}
+
+			.done {
+				@include glass(#00aa00, 10px);
+			}
+
+			button {
+				width: 100%;
+				@include button($pcolor);
+			}
+
+			input {
+				@include input($pcolor);
+			}
+
+			.img {
+				display: flex;
+				justify-content: center;
+
+				img {
+					width: 100%;
+					max-width: 350px;
+				}
+			}
+
+			.first {
+				display: flex;
+				justify-content: center;
+			}
+
+			.answer {
+				display: none;
+				padding: 20px;
+				@include glass(transparentize($pcolor, 0.1));
+				flex-direction: column;
+				gap: 10px;
+
+				.action {
+					display: flex;
+					flex-wrap: nowrap;
+					gap: 5px;
+
+					@media only screen and (max-width: 450px) {
+						& {
+							flex-wrap: wrap;
+						}
+					}
+
+					button {
+						word-break: break-all;
+					}
+				}
+			}
+		}
+
+		h4,h5 {
+			font-weight: 100;
+		}
+	}
+}
